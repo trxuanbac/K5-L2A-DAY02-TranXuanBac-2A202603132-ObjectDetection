@@ -1,0 +1,440 @@
+{
+  "confidence": 0.25,
+  "iou_threshold": 0.5,
+  "class_names": {
+    "0": "car",
+    "1": "van",
+    "2": "truck",
+    "3": "bus"
+  },
+  "note": "Fixed-threshold illustration, distinct from confidence-swept validation metrics.",
+  "lowest_validation_recall_class": "van",
+  "lowest_validation_recall": 0.46476600892756914,
+  "illustration": {
+    "image": "drive_052.jpg",
+    "classes": {
+      "car": {
+        "gold": 6,
+        "predictions": 7,
+        "tp": 5,
+        "fn": 1,
+        "fp": 2
+      },
+      "van": {
+        "gold": 1,
+        "predictions": 0,
+        "tp": 0,
+        "fn": 1,
+        "fp": 0
+      },
+      "truck": {
+        "gold": 0,
+        "predictions": 0,
+        "tp": 0,
+        "fn": 0,
+        "fp": 0
+      },
+      "bus": {
+        "gold": 1,
+        "predictions": 0,
+        "tp": 0,
+        "fn": 1,
+        "fp": 0
+      }
+    },
+    "tp": 5,
+    "fp": 2,
+    "fn": 3
+  },
+  "wrong_class_examples": [
+    {
+      "image": "drive_052.jpg",
+      "expected": "van",
+      "predicted": "car",
+      "iou": 0.9128
+    },
+    {
+      "image": "drive_053.jpg",
+      "expected": "van",
+      "predicted": "car",
+      "iou": 0.7838
+    },
+    {
+      "image": "drive_058.jpg",
+      "expected": "truck",
+      "predicted": "van",
+      "iou": 0.8781
+    },
+    {
+      "image": "drive_060.jpg",
+      "expected": "van",
+      "predicted": "car",
+      "iou": 0.7983
+    }
+  ],
+  "per_image": [
+    {
+      "image": "drive_051.jpg",
+      "classes": {
+        "car": {
+          "gold": 8,
+          "predictions": 5,
+          "tp": 4,
+          "fn": 4,
+          "fp": 1
+        },
+        "van": {
+          "gold": 0,
+          "predictions": 0,
+          "tp": 0,
+          "fn": 0,
+          "fp": 0
+        },
+        "truck": {
+          "gold": 1,
+          "predictions": 0,
+          "tp": 0,
+          "fn": 1,
+          "fp": 0
+        },
+        "bus": {
+          "gold": 0,
+          "predictions": 0,
+          "tp": 0,
+          "fn": 0,
+          "fp": 0
+        }
+      },
+      "tp": 4,
+      "fp": 1,
+      "fn": 5
+    },
+    {
+      "image": "drive_052.jpg",
+      "classes": {
+        "car": {
+          "gold": 6,
+          "predictions": 7,
+          "tp": 5,
+          "fn": 1,
+          "fp": 2
+        },
+        "van": {
+          "gold": 1,
+          "predictions": 0,
+          "tp": 0,
+          "fn": 1,
+          "fp": 0
+        },
+        "truck": {
+          "gold": 0,
+          "predictions": 0,
+          "tp": 0,
+          "fn": 0,
+          "fp": 0
+        },
+        "bus": {
+          "gold": 1,
+          "predictions": 0,
+          "tp": 0,
+          "fn": 1,
+          "fp": 0
+        }
+      },
+      "tp": 5,
+      "fp": 2,
+      "fn": 3
+    },
+    {
+      "image": "drive_053.jpg",
+      "classes": {
+        "car": {
+          "gold": 7,
+          "predictions": 6,
+          "tp": 3,
+          "fn": 4,
+          "fp": 3
+        },
+        "van": {
+          "gold": 1,
+          "predictions": 0,
+          "tp": 0,
+          "fn": 1,
+          "fp": 0
+        },
+        "truck": {
+          "gold": 0,
+          "predictions": 0,
+          "tp": 0,
+          "fn": 0,
+          "fp": 0
+        },
+        "bus": {
+          "gold": 2,
+          "predictions": 2,
+          "tp": 2,
+          "fn": 0,
+          "fp": 0
+        }
+      },
+      "tp": 5,
+      "fp": 3,
+      "fn": 5
+    },
+    {
+      "image": "drive_054.jpg",
+      "classes": {
+        "car": {
+          "gold": 5,
+          "predictions": 5,
+          "tp": 5,
+          "fn": 0,
+          "fp": 0
+        },
+        "van": {
+          "gold": 0,
+          "predictions": 0,
+          "tp": 0,
+          "fn": 0,
+          "fp": 0
+        },
+        "truck": {
+          "gold": 0,
+          "predictions": 0,
+          "tp": 0,
+          "fn": 0,
+          "fp": 0
+        },
+        "bus": {
+          "gold": 1,
+          "predictions": 0,
+          "tp": 0,
+          "fn": 1,
+          "fp": 0
+        }
+      },
+      "tp": 5,
+      "fp": 0,
+      "fn": 1
+    },
+    {
+      "image": "drive_055.jpg",
+      "classes": {
+        "car": {
+          "gold": 3,
+          "predictions": 3,
+          "tp": 3,
+          "fn": 0,
+          "fp": 0
+        },
+        "van": {
+          "gold": 0,
+          "predictions": 0,
+          "tp": 0,
+          "fn": 0,
+          "fp": 0
+        },
+        "truck": {
+          "gold": 0,
+          "predictions": 0,
+          "tp": 0,
+          "fn": 0,
+          "fp": 0
+        },
+        "bus": {
+          "gold": 0,
+          "predictions": 0,
+          "tp": 0,
+          "fn": 0,
+          "fp": 0
+        }
+      },
+      "tp": 3,
+      "fp": 0,
+      "fn": 0
+    },
+    {
+      "image": "drive_056.jpg",
+      "classes": {
+        "car": {
+          "gold": 15,
+          "predictions": 16,
+          "tp": 13,
+          "fn": 2,
+          "fp": 3
+        },
+        "van": {
+          "gold": 1,
+          "predictions": 1,
+          "tp": 1,
+          "fn": 0,
+          "fp": 0
+        },
+        "truck": {
+          "gold": 0,
+          "predictions": 0,
+          "tp": 0,
+          "fn": 0,
+          "fp": 0
+        },
+        "bus": {
+          "gold": 1,
+          "predictions": 0,
+          "tp": 0,
+          "fn": 1,
+          "fp": 0
+        }
+      },
+      "tp": 14,
+      "fp": 3,
+      "fn": 3
+    },
+    {
+      "image": "drive_057.jpg",
+      "classes": {
+        "car": {
+          "gold": 5,
+          "predictions": 7,
+          "tp": 5,
+          "fn": 0,
+          "fp": 2
+        },
+        "van": {
+          "gold": 0,
+          "predictions": 1,
+          "tp": 0,
+          "fn": 0,
+          "fp": 1
+        },
+        "truck": {
+          "gold": 0,
+          "predictions": 0,
+          "tp": 0,
+          "fn": 0,
+          "fp": 0
+        },
+        "bus": {
+          "gold": 0,
+          "predictions": 0,
+          "tp": 0,
+          "fn": 0,
+          "fp": 0
+        }
+      },
+      "tp": 5,
+      "fp": 3,
+      "fn": 0
+    },
+    {
+      "image": "drive_058.jpg",
+      "classes": {
+        "car": {
+          "gold": 32,
+          "predictions": 29,
+          "tp": 29,
+          "fn": 3,
+          "fp": 0
+        },
+        "van": {
+          "gold": 0,
+          "predictions": 1,
+          "tp": 0,
+          "fn": 0,
+          "fp": 1
+        },
+        "truck": {
+          "gold": 1,
+          "predictions": 0,
+          "tp": 0,
+          "fn": 1,
+          "fp": 0
+        },
+        "bus": {
+          "gold": 6,
+          "predictions": 5,
+          "tp": 5,
+          "fn": 1,
+          "fp": 0
+        }
+      },
+      "tp": 34,
+      "fp": 1,
+      "fn": 5
+    },
+    {
+      "image": "drive_059.jpg",
+      "classes": {
+        "car": {
+          "gold": 7,
+          "predictions": 7,
+          "tp": 7,
+          "fn": 0,
+          "fp": 0
+        },
+        "van": {
+          "gold": 1,
+          "predictions": 1,
+          "tp": 1,
+          "fn": 0,
+          "fp": 0
+        },
+        "truck": {
+          "gold": 0,
+          "predictions": 0,
+          "tp": 0,
+          "fn": 0,
+          "fp": 0
+        },
+        "bus": {
+          "gold": 0,
+          "predictions": 0,
+          "tp": 0,
+          "fn": 0,
+          "fp": 0
+        }
+      },
+      "tp": 8,
+      "fp": 0,
+      "fn": 0
+    },
+    {
+      "image": "drive_060.jpg",
+      "classes": {
+        "car": {
+          "gold": 6,
+          "predictions": 11,
+          "tp": 6,
+          "fn": 0,
+          "fp": 5
+        },
+        "van": {
+          "gold": 1,
+          "predictions": 0,
+          "tp": 0,
+          "fn": 1,
+          "fp": 0
+        },
+        "truck": {
+          "gold": 0,
+          "predictions": 0,
+          "tp": 0,
+          "fn": 0,
+          "fp": 0
+        },
+        "bus": {
+          "gold": 1,
+          "predictions": 0,
+          "tp": 0,
+          "fn": 1,
+          "fp": 0
+        }
+      },
+      "tp": 6,
+      "fp": 5,
+      "fn": 2
+    }
+  ],
+  "matched_boxes": 89,
+  "matches_iou_below_075": 10,
+  "mean_iou_of_matches": 0.849380210331682
+}

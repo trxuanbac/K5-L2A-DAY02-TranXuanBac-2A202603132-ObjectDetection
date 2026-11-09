@@ -1,0 +1,50 @@
+{
+  "experiment": "gold_reference",
+  "label_source": "gold, not student annotations",
+  "precision": 0.5181413629225566,
+  "recall": 0.6467476907396904,
+  "map50": 0.6454463317561205,
+  "map50_95": 0.4516017313109518,
+  "per_class": {
+    "car": {
+      "precision": 0.7271691948845862,
+      "recall": 0.8936170212765957,
+      "map50": 0.906855157691328,
+      "map50_95": 0.6348464881252265
+    },
+    "van": {
+      "precision": 0.24740900347183242,
+      "recall": 0.46476600892756914,
+      "map50": 0.48283226723525235,
+      "map50_95": 0.3301407249466951
+    },
+    "truck": {
+      "precision": 0.4122617971016243,
+      "recall": 0.5,
+      "map50": 0.495,
+      "map50_95": 0.396
+    },
+    "bus": {
+      "precision": 0.6857254562321836,
+      "recall": 0.7286077327545967,
+      "map50": 0.6970979020979021,
+      "map50_95": 0.44541971217188603
+    }
+  },
+  "class_names": {
+    "0": "car",
+    "1": "van",
+    "2": "truck",
+    "3": "bus"
+  },
+  "eval_images": 10,
+  "checkpoint": "/Users/chuoi/K5-L2-/K5-L2-Day02-ObjectDetection/outputs/gold_training/yolo26_runs/vehicle_gold/weights/best.pt",
+  "train_run": "/Users/chuoi/K5-L2-/K5-L2-Day02-ObjectDetection/outputs/gold_training/yolo26_runs/vehicle_gold",
+  "eval_run": "/Users/chuoi/K5-L2-/K5-L2-Day02-ObjectDetection/outputs/gold_training/yolo26_runs/vehicle_gold_eval",
+  "device": "cpu",
+  "epochs_completed": 50,
+  "ultralytics": "8.4.208",
+  "torch": "2.15.0",
+  "eval_role": "validation and checkpoint selection, not an independent test set",
+  "prediction_dir": "/Users/chuoi/K5-L2-/K5-L2-Day02-ObjectDetection/outputs/gold_training/eval_predictions/visuals"
+}

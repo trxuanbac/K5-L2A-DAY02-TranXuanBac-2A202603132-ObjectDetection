@@ -104,3 +104,9 @@ python3 tools/evaluate_annotations.py \
 Bộ ảnh là một tập con ảnh cảnh giao thông CCTV (nguồn gốc UA-DETRAC, phát hành lại dưới giấy phép CC-BY-4.0) đã được biên tập cho mục đích giảng dạy. Ảnh được đổi tên tuần tự và re-encode để loại bỏ metadata; repository không chứa ID ảnh nguồn, URL, hay nhãn train gold. Không đảo ngược, truy vết hay dùng thông tin ngoài repo để tìm nhãn.
 
 Chỉ dùng ảnh và nhãn trong phạm vi bài học. Không bổ sung ảnh cá nhân, biển số, dữ liệu khách hàng hoặc dữ liệu nhạy cảm vào repository/Colab công khai.
+
+## Thí nghiệm gold của bài làm Trần Xuân Bắc
+
+Theo yêu cầu học viên, đã chạy YOLO26n đủ 50 epoch trực tiếp trên gold đã chốt, với 50 ảnh train và 10 ảnh validation. Xem [báo cáo](report/individual/2A202603132_TranXuanBac.md), [quy trình train gold](report/individual/GOLD_TRAINING.md), và [notebook kết quả local](notebooks/day2_gold_results.ipynb).
+
+Cấu hình runtime gold dùng ID `0=car, 1=van, 2=truck, 3=bus`, phù hợp gold/eval; giữ riêng schema và bộ nhãn học viên đã khóa. Kết quả gold_reference không thay cho điểm QC của nhãn học viên. Gold train và checkpoint được giữ local.

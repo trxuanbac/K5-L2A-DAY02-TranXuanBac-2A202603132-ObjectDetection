@@ -8,6 +8,7 @@
 - Email: chưa bổ sung.
 - Repo bài làm: https://github.com/trxuanbac/K5-L2A-DAY02-TranXuanBac-2A202603132-ObjectDetection.
 - [Mở notebook trên Colab](https://colab.research.google.com/github/trxuanbac/K5-L2A-DAY02-TranXuanBac-2A202603132-ObjectDetection/blob/main/notebooks/day2_annotation_to_yolo.ipynb). Chưa có phiên Colab đã chạy.
+- [Notebook kết quả thí nghiệm gold](../../notebooks/day2_gold_results.ipynb): đọc artifact của phiên train local; không phải phiên train Colab.
 
 ## 2. Schema và mini guideline
 
@@ -79,35 +80,64 @@ Kết quả lưu tại [outputs/annotation_evaluation.json](../../outputs/annota
 - Trong `drive_001`, gold chỉ có 5 box trên xe đang lưu thông; hàng xe đỗ bên trái không được gán trong gold. `drive_028` tương tự: gold có 3 box xe lưu thông và bỏ qua hàng xe đỗ hai bên. Guideline hiện tại yêu cầu gán xe đỗ nếu nhận diện được, nên có bất nhất phạm vi.
 - Đối chiếu hình học theo box gold: 600/653 box gold có một box học viên chồng lấp IoU ≥ 0,50 khi tạm bỏ điều kiện lớp để chẩn đoán; đây không phải kết quả evaluator chính thức hoặc chỉ số đạt gate.
 
-Học viên đã chọn bảng ID `0=car, 1=truck, 2=bus, 3=van` và xác nhận **vẫn gán xe đỗ như guideline hiện tại**. Theo hai quy tắc này, file gold đang có ví dụ không khớp về ID và phạm vi. Cần giảng viên kiểm tra hoặc cung cấp bộ gold phù hợp trước khi dùng điểm này để kết luận chất lượng nhãn và rework theo gold.
+Học viên đã chọn bảng ID `0=car, 1=truck, 2=bus, 3=van` và xác nhận **vẫn gán xe đỗ như guideline hiện tại**. Lần đánh giá nguyên trạng được giữ để truy vết sự khác biệt ID/phạm vi. Sau đó học viên đã chốt bộ gold làm nguồn nhãn cho lần huấn luyện tham chiếu, dùng raw ID phù hợp với cả gold và eval; không sửa ngược nhãn CP4 hoặc thay điểm CP5.
 
-Quyết định hiện tại: giữ nguyên 50 file nhãn train của commit CP4; không đổi nhãn xe đỗ thành nền hoặc hoán đổi ID lớp để làm tăng điểm. Gold nguyên trạng được giữ nguyên; ảnh so sánh có gold chỉ lưu local trong `outputs/gold_qc/`, không đưa lên GitHub. Chưa có kết quả sau rework và chưa đủ điều kiện CP6.
+Giữ nguyên 50 file nhãn học viên của commit CP4; không đổi nhãn xe đỗ thành nền hoặc hoán đổi ID để làm tăng điểm. Gold nguyên trạng được giữ nguyên; ảnh so sánh có gold chỉ lưu local trong `outputs/gold_qc/`, không đưa lên GitHub. Chưa có kết quả sau rework, CP5 của nhãn học viên vẫn chưa đạt.
 
-## 6. CP6 — Train và đánh giá YOLO
+Sau đó học viên chốt bộ gold làm dữ liệu huấn luyện và yêu cầu chạy train. Đã chuyển sang thí nghiệm riêng **gold_reference**, dùng trực tiếp 653 box gold, không coi đây là rework đã đạt gate của nhãn học viên. Xem [GOLD_TRAINING.md](GOLD_TRAINING.md).
 
-**Chưa chạy huấn luyện/validation/predict:** CP5 đã chạy nhưng F1 = 0,4926 chưa đạt điều kiện để đi tiếp. Notebook được cấu hình repo cá nhân và kiểm tra gold gate trước khi train.
+## 6. Huấn luyện và đánh giá — gold_reference
 
-- Model dự kiến: YOLO26n, 50 epochs, ảnh 640, seed 20260909 theo notebook.
-- Split giữ nguyên: 50 ảnh train, 10 ảnh eval làm validation và chọn best checkpoint; eval không phải test độc lập.
-- Chưa có runtime Colab, best checkpoint, precision, recall, mAP50, mAP50–95, hoặc 10 ảnh prediction của model đã train.
-- Các ảnh ở `assets/self_qc/` là **preview nhãn train**, không phải kết quả dự đoán trên eval.
+**Đã huấn luyện YOLO26n đủ 50 epoch trực tiếp trên gold đã chốt theo yêu cầu học viên**, sau đó validation riêng bằng `best.pt` và predict đủ 10 ảnh eval. Đây là thí nghiệm tham chiếu theo gold, không phải bằng chứng nhãn học viên đã đạt gate CP5.
 
-Phần phân tích:
+- Runtime local: Ultralytics 8.4.208, Torch 2.15.0; 5 epoch đầu trên Apple MPS, resume từ epoch 6 trên CPU khi MPS ngừng cập nhật. Giữ optimizer/EMA; log CSV có đúng 50 dòng epoch 1–50.
+- Thông số: YOLO26n pretrained, ảnh 640, batch 8, seed 20260909, AMP tắt, workers 0; optimizer auto chọn AdamW, lr ban đầu 0,00125. Batch cố định và AMP tắt để phù hợp runtime local, khác batch tự động của notebook gốc.
+- Train: đúng 50 ảnh, **653 box gold**; validation: đúng 10 ảnh và 113 box. Không đưa eval vào train.
+- Raw ID gold/eval: `0=car, 1=van, 2=truck, 3=bus`. Cấu hình runtime `outputs/gold_training/data_gold.yaml` dùng mapping này; `data.yaml` và nhãn CP4 vẫn giữ bản gốc.
+- Best checkpoint local: `outputs/gold_training/yolo26_runs/vehicle_gold/weights/best.pt`.
+- Chưa có phiên Google Colab đã train. Notebook kết quả đọc artifact của lần train CLI local và hiển thị kết quả thực tế; có thể mở notebook để xem hoặc chạy lại phần đọc artifact.
 
-1. Lớp có recall thấp nhất và ảnh minh họa: chờ kết quả validation thực tế.
-2. Nếu mAP50 cao nhưng mAP50–95 thấp: cần kiểm độ bám sát và vị trí bốn cạnh box, không kết luận chỉ từ một chỉ số. Chưa có kết quả của bài này để khẳng định tình huống đó xảy ra.
-3. Cặp lớp và lỗi liên quan guideline: van/minivan và car là ca cần kiểm thêm; CP3 đã đổi một xe trong `drive_019`. Chưa có đối chiếu gold hoặc confusion matrix để kết luận lỗi model.
-4. Không dùng eval để train vì cần giữ validation riêng để đánh giá và chọn checkpoint. Vì validation đồng thời dùng chọn best checkpoint, kết quả không phải đánh giá trên test độc lập.
+Kết quả validation của **best checkpoint** (không lấy số của epoch cuối):
+
+| Chỉ số trên 10 ảnh eval | Giá trị |
+|---|---:|
+| Precision | 0.518141 |
+| Recall | 0.646748 |
+| mAP50 | 0.645446 |
+| mAP50–95 | 0.451602 |
+
+| Lớp theo raw ID gold | Precision | Recall | mAP50 | mAP50–95 |
+|---|---:|---:|---:|---:|
+| car | 0.7272 | 0.8936 | 0.9069 | 0.6348 |
+| van | 0.2474 | 0.4648 | 0.4828 | 0.3301 |
+| truck | 0.4123 | 0.5000 | 0.4950 | 0.3960 |
+| bus | 0.6857 | 0.7286 | 0.6971 | 0.4454 |
+
+Bằng chứng:
+
+- [JSON chỉ số model](assets/model_eval_metrics_gold.json), [chẩn đoán prediction](assets/gold_prediction_analysis.json).
+- [Log theo epoch](assets/yolo26_runs/vehicle_gold/results.csv), [đồ thị train](assets/yolo26_runs/vehicle_gold/results.png), [confusion matrix](assets/yolo26_runs/vehicle_gold_eval/confusion_matrix_normalized.png).
+- [10 ảnh prediction](assets/eval_predictions/visuals/) và [notebook kết quả](../../notebooks/day2_gold_results.ipynb).
+- `assets/self_qc/` vẫn là preview nhãn học viên trên train, không phải prediction của model.
+
+Trả lời bốn câu hỏi:
+
+1. **Van có recall thấp nhất (0,4648).** Ở [drive_052.jpg](assets/eval_predictions/visuals/drive_052.jpg), chẩn đoán tại confidence 0,25 và IoU 0,50 ghi nhận 1 van gold, 0 dự đoán van: xe ở đầu làn phía trên bị nhận là car, box chồng lấp IoU 0,9128. Bus hai tầng lớn ở giữa ảnh cũng không có box bus. Các đếm tại một confidence này là minh họa ảnh, không thay cho chỉ số validation quét theo confidence.
+2. **mAP50 = 0,6454 và mAP50–95 = 0,4516**, chênh khoảng 0,1938. Cần kiểm độ sát và vị trí bốn cạnh box. Chẩn đoán prediction ở confidence 0,25 có 89 cặp khớp IoU ≥ 0,50, trong đó 10 cặp có IoU < 0,75; một phần box chỉ vượt được ngưỡng lỏng.
+3. Có ứng viên nhầm **van → car** trong `drive_052`, `053`, `060` và **truck → van** trong [drive_058.jpg](assets/eval_predictions/visuals/drive_058.jpg) (IoU 0,8781). Đã mở ảnh để đối chiếu. Định nghĩa van/minivan và truck cần nhất quán, nhưng model này train trực tiếp trên gold nên không thể quy lỗi cho guideline nhãn học viên. Train có car 533 box, van 46, truck 20 và bus 54: mất cân bằng lớp là một yếu tố cần xem xét; chưa có thí nghiệm ablation để kết luận nguyên nhân.
+4. Giữ 10 ảnh eval tách khỏi train để validation và chọn checkpoint. Vì eval đồng thời dùng chọn best checkpoint, các chỉ số trên không phải kết quả của một test set độc lập.
+
+Gold gốc, nhãn eval và nhãn học viên đều được kiểm tra hash giữ nguyên sau train. Không commit gold train, checkpoint hoặc ảnh train_batch có chứa box gold. Lần train có MPS không bảo đảm deterministic từng bit, dù có đặt seed.
 
 ## 7. Khó khăn và tiến độ
 
 - CVAT job 4 chỉ có `drive_002`; đã tạo task 5 chứa đủ 50 ảnh và giữ hai task gốc.
 - Repo local ban đầu trỏ tới repo đề bài; đã tạo fork riêng đúng thông tin học viên.
 - CP3 đã có checker, mẫu ngẫu nhiên và bằng chứng QC của AI; học viên còn cần tự rà nhãn.
-- CP4 đã có SHA và push bản nhãn ban đầu; chưa xác nhận nộp trên LMS hoặc mốc khóa chung của lớp. CP5 đã có kết quả ban đầu nhưng chưa đạt và phát hiện bất nhất ID/phạm vi; CP6 chưa chạy. Chưa đủ dữ kiện để tự nhận hoàn thành toàn bộ rubric.
+- CP4 đã có SHA và push bản nhãn ban đầu; chưa xác nhận nộp trên LMS hoặc mốc khóa chung của lớp. CP5 nhãn học viên chưa đạt. Theo yêu cầu học viên, đã train mô hình tham chiếu trực tiếp trên gold đủ 50 epoch, có metrics và 10 ảnh prediction; không coi thí nghiệm đó là bằng chứng nhãn học viên đã qua gate.
 
 ## 8. Công cụ AI và tài liệu tham khảo
 
-Codex tạo nhãn sơ bộ bằng YOLO11m pretrained trên COCO và chỉnh theo quan sát ảnh; dùng Python/Pillow để render preview, chạy checker và xử lý CVAT/GitHub. Xem [ghi nhận hỗ trợ AI](ANNOTATION_AI.md). Ultralytics 8.4.208 được dùng ở bước tạo nhãn; đây không phải kết quả train YOLO26n.
+Codex tạo nhãn sơ bộ bằng YOLO11m pretrained trên COCO và chỉnh theo quan sát ảnh; dùng Python/Pillow để render preview, chạy checker và xử lý CVAT/GitHub. Xem [ghi nhận hỗ trợ AI](ANNOTATION_AI.md). Ultralytics 8.4.208 được dùng ở bước tạo nhãn và thí nghiệm YOLO26n theo gold; hai đầu ra được ghi riêng. Lệnh train và quy tắc dữ liệu nằm trong [GOLD_TRAINING.md](GOLD_TRAINING.md).
 
 Đây là nhãn và nội dung báo cáo có AI hỗ trợ. Học viên chưa xác nhận tự kiểm tra, cần ghi đúng phạm vi hỗ trợ và tuân theo [RULES.md](../../RULES.md) trước khi nộp. Không dùng nhãn eval để tạo nhãn train; không tìm nhãn nguồn, tạo gold giả hoặc bịa chỉ số.
