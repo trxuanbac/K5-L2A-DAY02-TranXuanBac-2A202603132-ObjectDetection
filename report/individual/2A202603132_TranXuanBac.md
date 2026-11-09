@@ -13,7 +13,7 @@
 
 Áp dụng [GUIDELINE_MINI.md](../../GUIDELINE_MINI.md): `car=0`, `truck=1`, `bus=2`, `van=3`; bao sát phần phương tiện nhìn thấy, giới hạn ở mép ảnh và bỏ vật thể không đủ rõ để xác định lớp.
 
-Ba ca đã ghi trong guideline: xe bị che ở `drive_009`, xe buýt cắt khung ở `drive_029`, phương tiện nhỏ/mờ ở `drive_001`. Phần van/minivan mơ hồ cần học viên đối chiếu thêm với giảng viên; chưa có gold để xác nhận các quyết định lớp.
+Ba ca đã ghi trong guideline: xe bị che ở `drive_009`, xe buýt cắt khung ở `drive_029`, phương tiện nhỏ/mờ ở `drive_001`. Đối chiếu gold phát hiện ID lớp và phạm vi xe đỗ chưa khớp schema/guideline; xem CP5.
 
 ## 3. Annotation và CP3 — QC có AI hỗ trợ
 
@@ -45,17 +45,47 @@ Cách kiểm nội dung: lần lượt quét từng làn/hàng xe để tìm thi
 - Commit khóa nhãn ban đầu: [`9420f27238129b4ed2a9851db5fac3d55e98471a`](https://github.com/trxuanbac/K5-L2A-DAY02-TranXuanBac-2A202603132-ObjectDetection/commit/9420f27238129b4ed2a9851db5fac3d55e98471a), `Lock initial AI-assisted train annotations after CP3 QC`.
 - Đã tạo fork cá nhân và push commit khóa nhãn lên nhánh `main`. Các commit cập nhật báo cáo về sau giữ nguyên commit nhãn ban đầu này.
 - Chưa xác nhận nộp link trên LMS hoặc mốc khóa chung của lớp.
-- Chưa đọc hoặc sử dụng gold train. Khi rework sẽ tạo commit mới và giữ bản ban đầu, không viết lại lịch sử.
+- Gold train được học viên cung cấp và đọc sau khi commit nhãn ban đầu đã được push. Khi rework sẽ tạo commit mới và giữ bản ban đầu, không viết lại lịch sử.
 
 ## 5. CP5 — Gold QC và rework
 
-**Chưa chạy: chưa nhận được đường dẫn gold do giảng viên phát sau mốc khóa.** Chưa có `outputs/annotation_evaluation.json`; không có số liệu TP/FP/FN, precision, recall, F1 hoặc mean IoU để báo cáo.
+Đã nhận `gold_train_labels.rar` ngày 09/11/2026, giải nén bằng `bsdtar` vào thư mục `gold_train_labels/` được Git bỏ qua. Gold có đủ 50 file, cùng basename ảnh train và đạt checker cấu trúc. SHA-256 archive: `10be4e7fef7181882d30681414564ff975e3c011697e9989ab9c32d52f3f9b3f`.
 
-Sau khi được phát gold đúng mốc, chạy evaluator với matching một-một, cùng lớp, IoU ≥ 0,50. Chỉ đi tiếp khi F1 ≥ 0,80 và mean IoU của các cặp ghép ≥ 0,70. Nếu chưa đạt, kiểm tra ảnh cụ thể, ghi lý do sửa/giữ box và chạy lại; không sửa gold.
+Đã chạy nguyên bản evaluator, trước mọi rework:
+
+```bash
+python3 tools/evaluate_annotations.py \
+  --student-labels dataset/labels/train \
+  --gold-labels gold_train_labels \
+  --output outputs/annotation_evaluation.json
+```
+
+| Chỉ số | Lần đầu, gold nguyên trạng | Sau rework |
+|---|---:|---:|
+| TP | 452 | Chưa chạy |
+| FP | 730 | Chưa chạy |
+| FN | 201 | Chưa chạy |
+| Precision | 0,3824 | Chưa chạy |
+| Recall | 0,6922 | Chưa chạy |
+| F1 | 0,4926 | Chưa chạy |
+| mean_iou_of_matches | 0,8428 | Chưa chạy |
+| passed | false | Chưa chạy |
+
+Kết quả lưu tại [outputs/annotation_evaluation.json](../../outputs/annotation_evaluation.json). Matching một-một, cùng ID lớp, IoU ≥ 0,50. Mean IoU đạt 0,70 nhưng F1 chưa đạt 0,80; chưa đủ điều kiện train.
+
+Đã mở đối chiếu ảnh gốc, nhãn hiện có và gold trên `drive_001`, `008`, `018`, `028`; không suy nguyên nhân chỉ từ FP/FN:
+
+- Trong `drive_008`, xe buýt dài có raw gold ID 3, xe tải chở hàng có ID 2, các van có ID 1. Schema của repo là `bus=2`, `truck=1`, `van=3`. Đây là bất nhất cần xác nhận ánh xạ, không phải lý do tự đổi schema của nhãn train.
+- Trong `drive_001`, gold chỉ có 5 box trên xe đang lưu thông; hàng xe đỗ bên trái không được gán trong gold. `drive_028` tương tự: gold có 3 box xe lưu thông và bỏ qua hàng xe đỗ hai bên. Guideline hiện tại yêu cầu gán xe đỗ nếu nhận diện được, nên có bất nhất phạm vi.
+- Đối chiếu hình học theo box gold: 600/653 box gold có một box học viên chồng lấp IoU ≥ 0,50 khi tạm bỏ điều kiện lớp để chẩn đoán; đây không phải kết quả evaluator chính thức hoặc chỉ số đạt gate.
+
+Học viên đã chọn bảng ID `0=car, 1=truck, 2=bus, 3=van` và xác nhận **vẫn gán xe đỗ như guideline hiện tại**. Theo hai quy tắc này, file gold đang có ví dụ không khớp về ID và phạm vi. Cần giảng viên kiểm tra hoặc cung cấp bộ gold phù hợp trước khi dùng điểm này để kết luận chất lượng nhãn và rework theo gold.
+
+Quyết định hiện tại: giữ nguyên 50 file nhãn train của commit CP4; không đổi nhãn xe đỗ thành nền hoặc hoán đổi ID lớp để làm tăng điểm. Gold nguyên trạng được giữ nguyên; ảnh so sánh có gold chỉ lưu local trong `outputs/gold_qc/`, không đưa lên GitHub. Chưa có kết quả sau rework và chưa đủ điều kiện CP6.
 
 ## 6. CP6 — Train và đánh giá YOLO
 
-**Chưa chạy huấn luyện/validation/predict:** CP5 chưa đạt điều kiện để đi tiếp. Notebook được cấu hình repo cá nhân và kiểm tra gold gate trước khi train.
+**Chưa chạy huấn luyện/validation/predict:** CP5 đã chạy nhưng F1 = 0,4926 chưa đạt điều kiện để đi tiếp. Notebook được cấu hình repo cá nhân và kiểm tra gold gate trước khi train.
 
 - Model dự kiến: YOLO26n, 50 epochs, ảnh 640, seed 20260909 theo notebook.
 - Split giữ nguyên: 50 ảnh train, 10 ảnh eval làm validation và chọn best checkpoint; eval không phải test độc lập.
@@ -74,7 +104,7 @@ Phần phân tích:
 - CVAT job 4 chỉ có `drive_002`; đã tạo task 5 chứa đủ 50 ảnh và giữ hai task gốc.
 - Repo local ban đầu trỏ tới repo đề bài; đã tạo fork riêng đúng thông tin học viên.
 - CP3 đã có checker, mẫu ngẫu nhiên và bằng chứng QC của AI; học viên còn cần tự rà nhãn.
-- CP4 đã có SHA và push bản nhãn ban đầu; chưa xác nhận nộp trên LMS hoặc mốc khóa chung của lớp. CP5–CP6 chưa chạy, chưa có kết quả. Chưa đủ dữ kiện để tự nhận hoàn thành toàn bộ rubric.
+- CP4 đã có SHA và push bản nhãn ban đầu; chưa xác nhận nộp trên LMS hoặc mốc khóa chung của lớp. CP5 đã có kết quả ban đầu nhưng chưa đạt và phát hiện bất nhất ID/phạm vi; CP6 chưa chạy. Chưa đủ dữ kiện để tự nhận hoàn thành toàn bộ rubric.
 
 ## 8. Công cụ AI và tài liệu tham khảo
 
