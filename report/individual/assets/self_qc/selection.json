@@ -1,0 +1,41 @@
+{
+  "seed": 20261109,
+  "images": [
+    "drive_001.jpg",
+    "drive_004.jpg",
+    "drive_009.jpg",
+    "drive_012.jpg",
+    "drive_019.jpg",
+    "drive_024.jpg",
+    "drive_028.jpg",
+    "drive_032.jpg",
+    "drive_040.jpg",
+    "drive_050.jpg"
+  ],
+  "reviewer": "Codex (AI); not a claim of student manual self-QC",
+  "method": "random.Random(seed).sample(sorted(train_images), 10)",
+  "counts_after_cp3": {
+    "images": 50,
+    "boxes": 1182,
+    "classes": {
+      "car": 942,
+      "truck": 31,
+      "bus": 103,
+      "van": 106
+    }
+  },
+  "checker": "PASS 50/50",
+  "student_manual_review_confirmed": false,
+  "label_sha256": {
+    "drive_001.jpg": "533c5db0b8d34f818c2de242a2d1beda15af150427d59b726bca8e42e57f3da5",
+    "drive_004.jpg": "43dff3e15c95534a604b2a69c1106b03665ee10eeac73aa8ca302f609a0be024",
+    "drive_009.jpg": "0e691b019dfd312f449ae518e3edf4e0fb5697e488a3dc5e3daffaa58861002b",
+    "drive_012.jpg": "201c37740fd5b49e8e7b6b1a4974ee1b987efe0df0df7626979943aacdf24fa2",
+    "drive_019.jpg": "3b547a734cbcc73e987157eaa81235597a9a9d4c91f855901b1bc9d72f3f9386",
+    "drive_024.jpg": "ce4c30e73b5c3531fef8bc181ae4c18f95b3d060e6a5ba45df5e4e3724040258",
+    "drive_028.jpg": "30a11dbfb108f6f527a799c9a5f9b25b5766acf80a0abad7400e170a29ceac48",
+    "drive_032.jpg": "768109a70c3991fcc41612686f0cf5005f1ad8757017ff783853f3dadcc30174",
+    "drive_040.jpg": "bd29f5bd1b807bdbf180620918991f8ce2024bbc3390393e02a2f063c22744fa",
+    "drive_050.jpg": "2c6ac16d406a38fb1822753283fd8a38374911eb198296c3a36a2505c637067d"
+  }
+}
