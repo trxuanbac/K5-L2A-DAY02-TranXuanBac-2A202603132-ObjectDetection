@@ -42,8 +42,8 @@ Cách kiểm nội dung: lần lượt quét từng làn/hàng xe để tìm thi
 
 ## 4. CP4 — Bản nhãn ban đầu
 
-- Commit khóa nhãn ban đầu: sẽ ghi SHA sau khi tạo commit.
-- Repo đích đã được tạo bằng fork từ repo đề bài; trạng thái push sẽ cập nhật sau khi kiểm tra GitHub.
+- Commit khóa nhãn ban đầu: [`9420f27238129b4ed2a9851db5fac3d55e98471a`](https://github.com/trxuanbac/K5-L2A-DAY02-TranXuanBac-2A202603132-ObjectDetection/commit/9420f27238129b4ed2a9851db5fac3d55e98471a), `Lock initial AI-assisted train annotations after CP3 QC`.
+- Đã tạo fork cá nhân và push commit khóa nhãn lên nhánh `main`. Các commit cập nhật báo cáo về sau giữ nguyên commit nhãn ban đầu này.
 - Chưa xác nhận nộp link trên LMS hoặc mốc khóa chung của lớp.
 - Chưa đọc hoặc sử dụng gold train. Khi rework sẽ tạo commit mới và giữ bản ban đầu, không viết lại lịch sử.
 
@@ -74,7 +74,7 @@ Phần phân tích:
 - CVAT job 4 chỉ có `drive_002`; đã tạo task 5 chứa đủ 50 ảnh và giữ hai task gốc.
 - Repo local ban đầu trỏ tới repo đề bài; đã tạo fork riêng đúng thông tin học viên.
 - CP3 đã có checker, mẫu ngẫu nhiên và bằng chứng QC của AI; học viên còn cần tự rà nhãn.
-- CP4 cần lưu SHA/push và xác nhận nộp trên LMS; CP5–CP6 chưa có kết quả. Chưa đủ dữ kiện để tự nhận hoàn thành toàn bộ rubric.
+- CP4 đã có SHA và push bản nhãn ban đầu; chưa xác nhận nộp trên LMS hoặc mốc khóa chung của lớp. CP5–CP6 chưa chạy, chưa có kết quả. Chưa đủ dữ kiện để tự nhận hoàn thành toàn bộ rubric.
 
 ## 8. Công cụ AI và tài liệu tham khảo
 
