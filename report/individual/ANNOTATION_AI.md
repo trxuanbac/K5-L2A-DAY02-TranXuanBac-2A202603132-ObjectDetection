@@ -17,3 +17,7 @@ Lệnh `python3 tools/check_yolo_labels.py` đạt cấu trúc 50/50. Sau rework
 Bản ZIP YOLO, CVAT XML, dự đoán gốc, các chỉnh sửa và ảnh preview nằm tại `outputs/annotation_assist/` (thư mục này được Git bỏ qua). Token không được ghi vào repo hoặc báo cáo.
 
 Ngày 10/11/2026, Codex rà 50 ảnh để rework theo gold đã chốt: bỏ 576 box ngoài phạm vi/không rõ, đổi 42 lớp, chỉnh 2 box và thêm 1 car. Còn 607 box: car 490, truck 20, bus 53, van 44. Đã đồng bộ lại CVAT và kiểm tra bằng API. Audit và preview mới trong `assets/rework_qc/`. Xác nhận học viên tự rà 10 ảnh áp dụng bản CP3; lượt rework này vẫn ghi nhận do AI hỗ trợ. Gold không bị sửa và không đưa lên GitHub. Bản CP4 được giữ trong lịch sử Git.
+
+## Xử lý kết quả Colab — 10/11/2026
+
+Học viên chạy Colab đủ 50 epoch và tải notebook/ZIP về. Codex giữ nguyên notebook có output, kiểm tra log, phát hiện bản notebook cũ chưa chuẩn hóa ID eval và chấm lại best.pt/last.pt trên bản sao eval đúng schema student. Chọn last.pt trong hai checkpoint còn lưu, không khẳng định best của toàn bộ epoch. Đã mở rà 10 prediction sau chấm lại, đối chiếu van → car trong drive_053 và hỗ trợ cập nhật bốn câu hỏi. Gold/eval nguồn và checkpoint được giữ local; chỉ công khai notebook, số liệu, log và prediction trên ảnh eval đã có trong repo.

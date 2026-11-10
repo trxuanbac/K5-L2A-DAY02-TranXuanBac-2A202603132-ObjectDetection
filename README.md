@@ -111,6 +111,14 @@ Theo yêu cầu học viên, đã chạy YOLO26n đủ 50 epoch trực tiếp tr
 
 Cấu hình runtime gold dùng ID `0=car, 1=van, 2=truck, 3=bus`, phù hợp gold/eval; giữ riêng schema và bộ nhãn học viên đã khóa. Kết quả gold_reference không thay cho điểm QC của nhãn học viên. Gold train và checkpoint được giữ local.
 
-## Tiến độ cá nhân sau rework
+## Kết quả bài làm cá nhân
 
-Nhãn student sau rework: 50 ảnh, 607 box; CP5 đạt F1 **0,9508**, mean IoU **0,8488**. [Kết quả evaluator](outputs/annotation_evaluation.json) có ánh xạ raw gold sang ID student và hash của nhãn đã chấm; giữ nguyên ngưỡng bài. [Báo cáo](report/individual/2A202603132_TranXuanBac.md) ghi baseline, audit, xác nhận tự rà 10 ảnh CP3 và bằng chứng CVAT. Notebook chuẩn hóa ID trên bản sao eval; không sửa file nguồn hoặc đưa gold lên repo. Học viên đã cung cấp [phiên Colab đã chạy](https://colab.research.google.com/drive/1YR1tewJQCXHockB095uWxlC7hF9NdBQC#scrollTo=FX-WEVywQc3L); còn đọc và nhập output của phiên này, hoàn thiện câu hỏi phân tích và xác nhận nộp LMS.
+Nhãn student: **50 ảnh, 607 box**, CP5 đạt **F1 0,9508**, **mean IoU 0,8488**. [Báo cáo](report/individual/2A202603132_TranXuanBac.md) có kết quả trước/sau rework, xác nhận tự rà 10 ảnh CP3 và bằng chứng CVAT.
+
+Đã train YOLO26n **50 epoch trên Colab**. Notebook Colab cũ chưa chuẩn hóa thứ tự ID eval; đã giữ nguyên output gốc và chấm lại đúng ID trên hai checkpoint tải về. `last.pt` epoch 50 đạt **precision 0,5783; recall 0,6004; mAP50 0,5664; mAP50–95 0,3537**, cao hơn `best.pt` trong hai file còn lưu. Không khẳng định đây là best của mọi epoch trung gian. Nhãn eval nguồn và split 50 train/10 eval giữ nguyên.
+
+- [Colab đã chạy](https://colab.research.google.com/drive/1YR1tewJQCXHockB095uWxlC7hF9NdBQC).
+- [Notebook Colab gốc có output](notebooks/day2_colab_executed_original.ipynb), [notebook kết quả và đánh giá lại](notebooks/day2_colab_results.ipynb).
+- [Metrics sau chấm lại](report/individual/assets/model_eval_metrics.json), [10 ảnh prediction](report/individual/assets/eval_predictions/visuals/), [bốn câu trả lời](report/individual/2A202603132_TranXuanBac.md).
+
+Gold_reference local được giữ riêng. Còn cấp quyền xem notebook cho người chấm và nộp link repo lên LMS bằng tài khoản cá nhân.

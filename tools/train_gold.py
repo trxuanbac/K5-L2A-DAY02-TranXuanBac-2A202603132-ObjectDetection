@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Train a separate reference experiment using the user's finalized gold labels.
 
-The locked student annotations and their failed QC score remain unchanged.
+The gold-reference experiment is independent of student annotation QC.
 Gold labels and all intermediate training data stay under ignored local paths.
 """
 from __future__ import annotations
@@ -64,6 +64,10 @@ def main() -> None:
     original_gold = {p.name: digest(p) for p in sorted(gold.glob('*.txt'))}
     original_student = {p.name: digest(p) for p in (ROOT/'dataset/labels/train').glob('*.txt')}
     original_eval = {p.name: digest(p) for p in (ROOT/'dataset/labels/eval').glob('*.txt')}
+    qc_path = ROOT/'outputs/annotation_evaluation.json'
+    student_qc = json.loads(qc_path.read_text()) if qc_path.is_file() else {}
+    student_qc_passed = (student_qc.get('passed') is True
+                         and student_qc.get('student_labels_sha256') == original_student)
     dataset = out/'dataset'
     counts = {}
     for split, images, labels in [('train', train_images, gold), ('eval', eval_images, ROOT/'dataset/labels/eval')]:
@@ -93,7 +97,7 @@ def main() -> None:
         device = '0' if torch.cuda.is_available() else 'mps' if torch.backends.mps.is_available() else 'cpu'
     manifest = {
         'label_source': 'finalized gold, explicitly selected by user',
-        'experiment': 'gold_reference', 'student_annotation_qc_passed': False,
+        'experiment': 'gold_reference', 'student_annotation_qc_passed': student_qc_passed,
         'initial_student_commit': '9420f27238129b4ed2a9851db5fac3d55e98471a',
         'source_code_commit': subprocess.check_output(['git','rev-parse','HEAD'], cwd=ROOT, text=True).strip(),
         'script_sha256': digest(Path(__file__)), 'pretrained_weights_sha256': digest(args.weights),
@@ -181,11 +185,12 @@ def main() -> None:
         for artifact in source.iterdir():
             if artifact.is_file() and artifact.suffix.lower() in {'.png','.jpg','.csv','.yaml','.json'} and not artifact.name.startswith(('train_batch', 'labels')):
                 shutil.copy2(artifact, target/artifact.name)
-    target = assets/'eval_predictions'/prediction_dir.name
+    target = assets/'eval_predictions'/'gold_reference'/prediction_dir.name
     target.mkdir(parents=True, exist_ok=True)
     for image in prediction_dir.glob('*.jpg'):
         shutil.copy2(image, target/image.name)
-    shutil.copy2(out/'model_eval_metrics.json', assets/'model_eval_metrics_gold.json')
+    published_summary = {**summary, 'published_prediction_dir': 'eval_predictions/gold_reference/'+prediction_dir.name}
+    write_json(assets/'model_eval_metrics_gold.json', published_summary)
     with zipfile.ZipFile(out/'day2_gold_outputs.zip','w',zipfile.ZIP_DEFLATED) as package:
         package.write(out/'model_eval_metrics.json', 'day2_gold_outputs/model_eval_metrics.json')
         for folder in [out/'yolo26_runs', out/'eval_predictions']:

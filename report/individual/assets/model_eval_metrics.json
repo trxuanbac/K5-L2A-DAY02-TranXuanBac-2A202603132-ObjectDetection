@@ -1,0 +1,145 @@
+{
+  "checkpoint_name": "last.pt",
+  "checkpoint_sha256": "205846fb44de0e33f8bafe2863108341a357e7e3301e4e686d0b6b09fa99cac5",
+  "checkpoint_local": "/Users/chuoi/K5-L2-/K5-L2-Day02-ObjectDetection/outputs/colab_import/original/yolo26_runs/vehicle_annotation/weights/last.pt",
+  "precision": 0.5782920873896421,
+  "recall": 0.6004004125450605,
+  "map50": 0.5664414728064053,
+  "map50_95": 0.35367075295285677,
+  "per_class": {
+    "car": {
+      "precision": 0.867206895391715,
+      "recall": 0.8404255319148937,
+      "map50": 0.8911436846859837,
+      "map50_95": 0.568291569517737
+    },
+    "truck": {
+      "precision": 0.27411741217689906,
+      "recall": 0.41117611826534856,
+      "map50": 0.19277777777777774,
+      "map50_95": 0.13494444444444442
+    },
+    "bus": {
+      "precision": 0.8505523609294902,
+      "recall": 0.75,
+      "map50": 0.8332307692307692,
+      "map50_95": 0.4466228388278388
+    },
+    "van": {
+      "precision": 0.32129168106046413,
+      "recall": 0.4,
+      "map50": 0.3486136595310907,
+      "map50_95": 0.26482415902140677
+    }
+  },
+  "eval_run": "/Users/chuoi/K5-L2-/K5-L2-Day02-ObjectDetection/outputs/colab_import/corrected/yolo26_runs/vehicle_eval_last",
+  "experiment": "student_colab_corrected_eval",
+  "evaluation_environment": "local CPU; weights trained in Google Colab",
+  "ultralytics": "8.4.208",
+  "torch": "2.15.0",
+  "class_names": {
+    "0": "car",
+    "1": "truck",
+    "2": "bus",
+    "3": "van"
+  },
+  "eval_images": 10,
+  "train_images": 50,
+  "epochs_completed": 50,
+  "prediction_dir": "/Users/chuoi/K5-L2-/K5-L2-Day02-ObjectDetection/outputs/colab_import/corrected/eval_predictions/visuals",
+  "eval_raw_to_student_id_map": {
+    "0": 0,
+    "1": 3,
+    "2": 1,
+    "3": 2
+  },
+  "source_eval_labels_unchanged": true,
+  "checkpoint_selection": "Highest corrected mAP50-95 among the two saved Colab checkpoints best.pt and last.pt.",
+  "selection_limitation": "Intermediate epoch checkpoints were not saved; this does not establish the best corrected score across all 50 epochs.",
+  "eval_role": "Validation used for checkpoint selection; not an independent test set.",
+  "candidates": [
+    {
+      "checkpoint_name": "best.pt",
+      "checkpoint_sha256": "5aff0b6c5b890d6848af625fde491adf19454a58350bab527819513785e3b1ce",
+      "checkpoint_local": "/Users/chuoi/K5-L2-/K5-L2-Day02-ObjectDetection/outputs/colab_import/original/yolo26_runs/vehicle_annotation/weights/best.pt",
+      "precision": 0.36691986608907745,
+      "recall": 0.3659050942871437,
+      "map50": 0.3903635046622987,
+      "map50_95": 0.25143606400301566,
+      "per_class": {
+        "car": {
+          "precision": 0.6981667899599457,
+          "recall": 0.7136203771485748,
+          "map50": 0.7444486642967725,
+          "map50_95": 0.5298360360469924
+        },
+        "truck": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "map50": 0.01076086956521739,
+          "map50_95": 0.006456521739130433
+        },
+        "bus": {
+          "precision": 0.7695126743963642,
+          "recall": 0.75,
+          "map50": 0.806076526130874,
+          "map50_95": 0.46928373956960917
+        },
+        "van": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "map50": 0.00016795865633074936,
+          "map50_95": 0.00016795865633074939
+        }
+      },
+      "eval_run": "/Users/chuoi/K5-L2-/K5-L2-Day02-ObjectDetection/outputs/colab_import/corrected/yolo26_runs/vehicle_eval_best",
+      "saved_training_history_rows": 50,
+      "checkpoint_epoch": null
+    },
+    {
+      "checkpoint_name": "last.pt",
+      "checkpoint_sha256": "205846fb44de0e33f8bafe2863108341a357e7e3301e4e686d0b6b09fa99cac5",
+      "checkpoint_local": "/Users/chuoi/K5-L2-/K5-L2-Day02-ObjectDetection/outputs/colab_import/original/yolo26_runs/vehicle_annotation/weights/last.pt",
+      "precision": 0.5782920873896421,
+      "recall": 0.6004004125450605,
+      "map50": 0.5664414728064053,
+      "map50_95": 0.35367075295285677,
+      "per_class": {
+        "car": {
+          "precision": 0.867206895391715,
+          "recall": 0.8404255319148937,
+          "map50": 0.8911436846859837,
+          "map50_95": 0.568291569517737
+        },
+        "truck": {
+          "precision": 0.27411741217689906,
+          "recall": 0.41117611826534856,
+          "map50": 0.19277777777777774,
+          "map50_95": 0.13494444444444442
+        },
+        "bus": {
+          "precision": 0.8505523609294902,
+          "recall": 0.75,
+          "map50": 0.8332307692307692,
+          "map50_95": 0.4466228388278388
+        },
+        "van": {
+          "precision": 0.32129168106046413,
+          "recall": 0.4,
+          "map50": 0.3486136595310907,
+          "map50_95": 0.26482415902140677
+        }
+      },
+      "eval_run": "/Users/chuoi/K5-L2-/K5-L2-Day02-ObjectDetection/outputs/colab_import/corrected/yolo26_runs/vehicle_eval_last",
+      "saved_training_history_rows": 50,
+      "checkpoint_epoch": 50
+    }
+  ],
+  "saved_training_history_rows": 50,
+  "checkpoint_epoch": 50,
+  "published_prediction_dir": "eval_predictions/visuals",
+  "published_eval_dir": "yolo26_runs/vehicle_eval",
+  "published_train_dir": "yolo26_runs/vehicle_annotation",
+  "source_repo_commit": "8fb51d809cda4015c23c3590411b943106b4e397",
+  "source_colab_url": "https://colab.research.google.com/drive/1YR1tewJQCXHockB095uWxlC7hF9NdBQC"
+}

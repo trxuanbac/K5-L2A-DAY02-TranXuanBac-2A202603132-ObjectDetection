@@ -46,5 +46,6 @@
   "ultralytics": "8.4.208",
   "torch": "2.15.0",
   "eval_role": "validation and checkpoint selection, not an independent test set",
-  "prediction_dir": "/Users/chuoi/K5-L2-/K5-L2-Day02-ObjectDetection/outputs/gold_training/eval_predictions/visuals"
+  "prediction_dir": "/Users/chuoi/K5-L2-/K5-L2-Day02-ObjectDetection/outputs/gold_training/eval_predictions/visuals",
+  "published_prediction_dir": "eval_predictions/gold_reference/visuals"
 }
