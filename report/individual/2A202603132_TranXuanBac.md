@@ -5,7 +5,7 @@
 - Họ tên: Trần Xuân Bắc.
 - MSSV: 2A202603132.
 - Lớp: L2A.
-- Email: chưa bổ sung.
+- Email: Bxuan964@gmail.com (theo cấu hình Git local).
 - Repo bài làm: https://github.com/trxuanbac/K5-L2A-DAY02-TranXuanBac-2A202603132-ObjectDetection.
 - [Mở notebook trên Colab](https://colab.research.google.com/github/trxuanbac/K5-L2A-DAY02-TranXuanBac-2A202603132-ObjectDetection/blob/main/notebooks/day2_annotation_to_yolo.ipynb). Chưa có phiên Colab đã chạy.
 - [Notebook kết quả thí nghiệm gold](../../notebooks/day2_gold_results.ipynb): đọc artifact của phiên train local; không phải phiên train Colab.
@@ -14,7 +14,7 @@
 
 Áp dụng [GUIDELINE_MINI.md](../../GUIDELINE_MINI.md): `car=0`, `truck=1`, `bus=2`, `van=3`; bao sát phần phương tiện nhìn thấy, giới hạn ở mép ảnh và bỏ vật thể không đủ rõ để xác định lớp.
 
-Ba ca đã ghi trong guideline: xe bị che ở `drive_009`, xe buýt cắt khung ở `drive_029`, phương tiện nhỏ/mờ ở `drive_001`. Đối chiếu gold phát hiện ID lớp và phạm vi xe đỗ chưa khớp schema/guideline; xem CP5.
+Ba ca ban đầu: xe bị che ở `drive_009`, xe buýt cắt khung ở `drive_029`, phương tiện nhỏ/mờ ở `drive_001`. Sau khi học viên chốt gold, guideline bổ sung quyết định phạm vi và phân biệt MPV/van trong rework; giữ ID student và ánh xạ tường minh khi so với gold.
 
 ## 3. Annotation và CP3 — QC có AI hỗ trợ
 
@@ -22,7 +22,7 @@ Ba ca đã ghi trong guideline: xe bị che ở `drive_009`, xe buýt cắt khun
 - Sau CP3: **1.182 box**, gồm car 942, truck 31, bus 103, van 106.
 - `python3 tools/check_yolo_labels.py`: **ĐẠT cấu trúc 50/50**.
 - Chọn ngẫu nhiên 10 ảnh bằng `random.Random(20261109).sample(sorted(train_images), 10)`; giữ seed để tái lập.
-- Codex quan sát cả ảnh có box và ảnh gốc; đây là lượt kiểm tra của AI, **học viên chưa xác nhận đã tự rà bằng mắt**.
+- Codex quan sát cả ảnh có box và ảnh gốc. Ngày 10/11/2026, học viên xác nhận **“Đã tự rà đủ 10 ảnh”** trong `assets/self_qc/`; ghi nhận tại [selection.json](assets/self_qc/selection.json). Xác nhận này áp dụng bản CP3, trước rework CP5.
 
 | Ảnh ngẫu nhiên | Nội dung đã rà và kết quả |
 |---|---|
@@ -50,41 +50,47 @@ Cách kiểm nội dung: lần lượt quét từng làn/hàng xe để tìm thi
 
 ## 5. CP5 — Gold QC và rework
 
-Đã nhận `gold_train_labels.rar` ngày 09/11/2026, giải nén bằng `bsdtar` vào thư mục `gold_train_labels/` được Git bỏ qua. Gold có đủ 50 file, cùng basename ảnh train và đạt checker cấu trúc. SHA-256 archive: `10be4e7fef7181882d30681414564ff975e3c011697e9989ab9c32d52f3f9b3f`.
+Đã nhận `gold_train_labels.rar` ngày 09/11/2026, giải nén bằng `bsdtar` vào `gold_train_labels/` được Git bỏ qua. Gold có đủ 50 file, 653 box và đạt checker cấu trúc. SHA-256 archive: `10be4e7fef7181882d30681414564ff975e3c011697e9989ab9c32d52f3f9b3f`. Hash 50 file gold giữ nguyên sau rework.
 
-Đã chạy nguyên bản evaluator, trước mọi rework:
+### Chuẩn hóa ID để so sánh cùng lớp
+
+Schema student/CVAT giữ `0=car, 1=truck, 2=bus, 3=van`. Gold phát hành và eval thực tế dùng `0=car, 1=van, 2=truck, 3=bus`, đã đối chiếu ảnh `drive_008`, `052`, `058`. Vì vậy evaluator bổ sung tùy chọn **gold-ID → student-ID** `0:0,1:3,2:1,3:2`, chỉ đổi ID trong bộ nhớ. Box, file gold, thuật toán matching một-một, IoU ≥ 0,50 và hai ngưỡng gate được giữ nguyên. Có test kiểm tra song ánh, giữ tọa độ, matching cùng lớp/một-một và độ phủ tên file.
+
+Lần chạy raw ban đầu giữ tại [annotation_evaluation_initial_raw.json](../../outputs/annotation_evaluation_initial_raw.json). Baseline đã chuẩn hóa ID nhưng chưa sửa nhãn được lưu riêng tại [annotation_evaluation_before_rework.json](../../outputs/annotation_evaluation_before_rework.json). Dùng baseline này để so sánh tác động của rework, tránh gộp cải thiện do ánh xạ ID vào cải thiện nhãn.
+
+| Chỉ số | Raw ban đầu | Trước rework, cùng lớp | Sau rework, cùng lớp |
+|---|---:|---:|---:|
+| TP | 452 | 557 | 599 |
+| FP | 730 | 625 | 8 |
+| FN | 201 | 96 | 54 |
+| Precision | 0,3824 | 0,4712 | 0,9868 |
+| Recall | 0,6922 | 0,8530 | 0,9173 |
+| F1 | 0,4926 | 0,6071 | **0,9508** |
+| mean_iou_of_matches | 0,8428 | 0,8492 | **0,8488** |
+| passed | false | false | **true** |
+
+### Nội dung sửa sau khi chốt gold
+
+Ban đầu học viên chọn giữ xe đỗ theo guideline cũ; sau đó học viên chốt **“bộ gold là chốt”**. Rework ngày 10/11/2026 dùng phạm vi gold làm tham chiếu và cập nhật guideline tương ứng. Bản CP4 vẫn truy lại được tại commit `9420f27`; lịch sử không bị viết lại.
+
+Codex mở rà 50/50 ảnh để xét phạm vi, lớp và cạnh box. Từ 1.182 xuống **607 box**: bỏ 576 box thuộc hàng xe ven lề/làn ngoài phạm vi hoặc xe xa không rõ; đổi 42 lớp sau khi đối chiếu MPV/car/van; chỉnh 2 box theo phần nhìn thấy; thêm 1 car thấy được ở `drive_017`. Nhãn sau sửa có car 490, truck 20, bus 53, van 44. Không sao chép bộ tọa độ gold vào nhãn student.
+
+Ví dụ: `drive_001` và `028` bỏ hàng xe ven đường ngoài phạm vi đã chốt; `drive_009` khôi phục cạnh trên box xe bị che theo phần thân nhìn thấy; `drive_050` thu box xe con về đúng mái xe; `drive_019` vẫn giữ xe cứu hộ trong vùng gán là truck. Quyết định phạm vi không đồng nghĩa mọi xe đỗ đều bị bỏ qua. Các ảnh vẫn còn 54 FN và 8 FP theo evaluator; đạt gate không có nghĩa nhãn hoàn hảo.
+
+Bằng chứng: [audit sửa theo ảnh](assets/rework_qc/audit.json), [10 preview sau rework](assets/rework_qc/). Codex đã mở kiểm tra lại các preview này; xác nhận tự rà 10 ảnh của học viên ở CP3 không được dùng để khẳng định học viên đã rà bản rework.
 
 ```bash
+python3 tools/check_yolo_labels.py
 python3 tools/evaluate_annotations.py \
   --student-labels dataset/labels/train \
   --gold-labels gold_train_labels \
+  --gold-class-map 0:0,1:3,2:1,3:2 \
   --output outputs/annotation_evaluation.json
 ```
 
-| Chỉ số | Lần đầu, gold nguyên trạng | Sau rework |
-|---|---:|---:|
-| TP | 452 | Chưa chạy |
-| FP | 730 | Chưa chạy |
-| FN | 201 | Chưa chạy |
-| Precision | 0,3824 | Chưa chạy |
-| Recall | 0,6922 | Chưa chạy |
-| F1 | 0,4926 | Chưa chạy |
-| mean_iou_of_matches | 0,8428 | Chưa chạy |
-| passed | false | Chưa chạy |
+Checker **đạt 50/50**. [Kết quả CP5 sau rework](../../outputs/annotation_evaluation.json) đạt cả F1 ≥ 0,80 và mean IoU ≥ 0,70, đủ điều kiện bắt đầu train nhãn student. JSON lưu hash từng file train để notebook từ chối nhãn khác phiên đã chấm. CVAT task 5/job 5 đã đồng bộ và đọc lại đủ 607 box trên 50 ảnh; [xác nhận đồng bộ](assets/rework_qc/cvat_sync_status.json).
 
-Kết quả lưu tại [outputs/annotation_evaluation.json](../../outputs/annotation_evaluation.json). Matching một-một, cùng ID lớp, IoU ≥ 0,50. Mean IoU đạt 0,70 nhưng F1 chưa đạt 0,80; chưa đủ điều kiện train.
-
-Đã mở đối chiếu ảnh gốc, nhãn hiện có và gold trên `drive_001`, `008`, `018`, `028`; không suy nguyên nhân chỉ từ FP/FN:
-
-- Trong `drive_008`, xe buýt dài có raw gold ID 3, xe tải chở hàng có ID 2, các van có ID 1. Schema của repo là `bus=2`, `truck=1`, `van=3`. Đây là bất nhất cần xác nhận ánh xạ, không phải lý do tự đổi schema của nhãn train.
-- Trong `drive_001`, gold chỉ có 5 box trên xe đang lưu thông; hàng xe đỗ bên trái không được gán trong gold. `drive_028` tương tự: gold có 3 box xe lưu thông và bỏ qua hàng xe đỗ hai bên. Guideline hiện tại yêu cầu gán xe đỗ nếu nhận diện được, nên có bất nhất phạm vi.
-- Đối chiếu hình học theo box gold: 600/653 box gold có một box học viên chồng lấp IoU ≥ 0,50 khi tạm bỏ điều kiện lớp để chẩn đoán; đây không phải kết quả evaluator chính thức hoặc chỉ số đạt gate.
-
-Học viên đã chọn bảng ID `0=car, 1=truck, 2=bus, 3=van` và xác nhận **vẫn gán xe đỗ như guideline hiện tại**. Lần đánh giá nguyên trạng được giữ để truy vết sự khác biệt ID/phạm vi. Sau đó học viên đã chốt bộ gold làm nguồn nhãn cho lần huấn luyện tham chiếu, dùng raw ID phù hợp với cả gold và eval; không sửa ngược nhãn CP4 hoặc thay điểm CP5.
-
-Giữ nguyên 50 file nhãn học viên của commit CP4; không đổi nhãn xe đỗ thành nền hoặc hoán đổi ID để làm tăng điểm. Gold nguyên trạng được giữ nguyên; ảnh so sánh có gold chỉ lưu local trong `outputs/gold_qc/`, không đưa lên GitHub. Chưa có kết quả sau rework, CP5 của nhãn học viên vẫn chưa đạt.
-
-Sau đó học viên chốt bộ gold làm dữ liệu huấn luyện và yêu cầu chạy train. Đã chuyển sang thí nghiệm riêng **gold_reference**, dùng trực tiếp 653 box gold, không coi đây là rework đã đạt gate của nhãn học viên. Xem [GOLD_TRAINING.md](GOLD_TRAINING.md).
+Thí nghiệm gold_reference dưới đây đã chạy trước rework, dùng trực tiếp gold theo yêu cầu học viên. Các chỉ số model của nó giữ nguyên và không được đổi tên thành kết quả train nhãn student.
 
 ## 6. Huấn luyện và đánh giá — gold_reference
 
@@ -127,17 +133,20 @@ Trả lời bốn câu hỏi:
 3. Có ứng viên nhầm **van → car** trong `drive_052`, `053`, `060` và **truck → van** trong [drive_058.jpg](assets/eval_predictions/visuals/drive_058.jpg) (IoU 0,8781). Đã mở ảnh để đối chiếu. Định nghĩa van/minivan và truck cần nhất quán, nhưng model này train trực tiếp trên gold nên không thể quy lỗi cho guideline nhãn học viên. Train có car 533 box, van 46, truck 20 và bus 54: mất cân bằng lớp là một yếu tố cần xem xét; chưa có thí nghiệm ablation để kết luận nguyên nhân.
 4. Giữ 10 ảnh eval tách khỏi train để validation và chọn checkpoint. Vì eval đồng thời dùng chọn best checkpoint, các chỉ số trên không phải kết quả của một test set độc lập.
 
-Gold gốc, nhãn eval và nhãn học viên đều được kiểm tra hash giữ nguyên sau train. Không commit gold train, checkpoint hoặc ảnh train_batch có chứa box gold. Lần train có MPS không bảo đảm deterministic từng bit, dù có đặt seed.
+Tại thời điểm train gold_reference, gold gốc, nhãn eval và nhãn học viên được kiểm tra hash giữ nguyên sau train. Nhãn student được rework sau đó, có audit riêng ở CP5. Không commit gold train, checkpoint hoặc ảnh train_batch có chứa box gold. Lần train có MPS không bảo đảm deterministic từng bit, dù có đặt seed.
 
-## 7. Khó khăn và tiến độ
+## 7. Tiến độ và việc còn cần thực hiện
 
-- CVAT job 4 chỉ có `drive_002`; đã tạo task 5 chứa đủ 50 ảnh và giữ hai task gốc.
-- Repo local ban đầu trỏ tới repo đề bài; đã tạo fork riêng đúng thông tin học viên.
-- CP3 đã có checker, mẫu ngẫu nhiên và bằng chứng QC của AI; học viên còn cần tự rà nhãn.
-- CP4 đã có SHA và push bản nhãn ban đầu; chưa xác nhận nộp trên LMS hoặc mốc khóa chung của lớp. CP5 nhãn học viên chưa đạt. Theo yêu cầu học viên, đã train mô hình tham chiếu trực tiếp trên gold đủ 50 epoch, có metrics và 10 ảnh prediction; không coi thí nghiệm đó là bằng chứng nhãn học viên đã qua gate.
+- CP3: checker đạt; học viên đã xác nhận tự rà 10 preview CP3 ngày 10/11/2026.
+- CP4: bản đầu `9420f27` đã push và được giữ nguyên. Chưa có xác nhận link đã nộp trên LMS hoặc mốc khóa chung của lớp.
+- CP5: rework 50 ảnh đã đạt F1 0,9508 và mean IoU 0,8488; nhãn và CVAT khớp 607 box.
+- Huấn luyện gold_reference: đã hoàn tất local đủ 50 epoch, có metrics thật, 10 prediction và phân tích bốn câu hỏi. Nhãn gold gốc giữ local.
+- Notebook student đã chuẩn bị chạy sau CP5: kiểm tra hash nhãn train, tạo dataset runtime riêng, chuyển **bản sao** eval từ raw ID sang ID student, giữ 50 train/10 eval và nguyên tọa độ. Chạy preflight local đạt; chưa chạy huấn luyện student/Colab.
+- **Còn phiên Colab đã chạy và nộp link repo trên LMS.** Phiên điều khiển trình duyệt không kết nối được và không tìm thấy tích hợp Colab khả dụng; chưa thể chạy hoặc lưu phiên Colab bằng tài khoản học viên. [Mở notebook đã chuẩn bị trên Colab](https://colab.research.google.com/github/trxuanbac/K5-L2A-DAY02-TranXuanBac-2A202603132-ObjectDetection/blob/main/notebooks/day2_annotation_to_yolo.ipynb), chọn GPU nếu có, chạy từ đầu tới cuối, lưu bản vào Drive và lấy link quyền xem. Sau đó nhập ZIP kết quả như [SUBMISSION.md](../../SUBMISSION.md). Không upload gold train lên Colab/GitHub.
+- Nộp link repo bằng tài khoản cá nhân trên [LMS](https://aithucchien.vinuni.edu.vn); chưa đánh dấu đã nộp khi chưa có xác nhận thực tế.
 
 ## 8. Công cụ AI và tài liệu tham khảo
 
 Codex tạo nhãn sơ bộ bằng YOLO11m pretrained trên COCO và chỉnh theo quan sát ảnh; dùng Python/Pillow để render preview, chạy checker và xử lý CVAT/GitHub. Xem [ghi nhận hỗ trợ AI](ANNOTATION_AI.md). Ultralytics 8.4.208 được dùng ở bước tạo nhãn và thí nghiệm YOLO26n theo gold; hai đầu ra được ghi riêng. Lệnh train và quy tắc dữ liệu nằm trong [GOLD_TRAINING.md](GOLD_TRAINING.md).
 
-Đây là nhãn và nội dung báo cáo có AI hỗ trợ. Học viên chưa xác nhận tự kiểm tra, cần ghi đúng phạm vi hỗ trợ và tuân theo [RULES.md](../../RULES.md) trước khi nộp. Không dùng nhãn eval để tạo nhãn train; không tìm nhãn nguồn, tạo gold giả hoặc bịa chỉ số.
+Đây là nhãn và nội dung báo cáo có AI hỗ trợ. Học viên đã xác nhận tự rà 10 ảnh CP3; phần rework 50 ảnh và kiểm tra preview sau sửa do Codex thực hiện. Cần ghi đúng phạm vi hỗ trợ và tuân theo [RULES.md](../../RULES.md) trước khi nộp. Không dùng nhãn eval để tạo nhãn train; không tìm nhãn nguồn, tạo gold giả hoặc bịa chỉ số.

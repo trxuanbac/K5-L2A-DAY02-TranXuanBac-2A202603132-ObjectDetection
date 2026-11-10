@@ -12,7 +12,7 @@
     "drive_040.jpg",
     "drive_050.jpg"
   ],
-  "reviewer": "Codex (AI); not a claim of student manual self-QC",
+  "reviewer": "Codex (AI) preview inspection; student confirmed own review of these 10 CP3 images",
   "method": "random.Random(seed).sample(sorted(train_images), 10)",
   "counts_after_cp3": {
     "images": 50,
@@ -25,7 +25,7 @@
     }
   },
   "checker": "PASS 50/50",
-  "student_manual_review_confirmed": false,
+  "student_manual_review_confirmed": true,
   "label_sha256": {
     "drive_001.jpg": "533c5db0b8d34f818c2de242a2d1beda15af150427d59b726bca8e42e57f3da5",
     "drive_004.jpg": "43dff3e15c95534a604b2a69c1106b03665ee10eeac73aa8ca302f609a0be024",
@@ -37,5 +37,9 @@
     "drive_032.jpg": "768109a70c3991fcc41612686f0cf5005f1ad8757017ff783853f3dadcc30174",
     "drive_040.jpg": "bd29f5bd1b807bdbf180620918991f8ce2024bbc3390393e02a2f063c22744fa",
     "drive_050.jpg": "2c6ac16d406a38fb1822753283fd8a38374911eb198296c3a36a2505c637067d"
-  }
+  },
+  "student_confirmation_date": "2026-11-10",
+  "student_confirmation_text": "Đã tự rà đủ 10 ảnh",
+  "student_review_scope": "CP3 previews at initial locked commit; does not assert review of subsequent CP5 rework",
+  "source_commit": "9420f27238129b4ed2a9851db5fac3d55e98471a"
 }

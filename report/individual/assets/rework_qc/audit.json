@@ -1,0 +1,1221 @@
+{
+  "date": "2026-11-10",
+  "reviewer": "Codex (AI-assisted visual rework)",
+  "student_schema": {
+    "0": "car",
+    "1": "truck",
+    "2": "bus",
+    "3": "van"
+  },
+  "gold_to_student_id_map": {
+    "0": 0,
+    "1": 3,
+    "2": 1,
+    "3": 2
+  },
+  "source_commit": "9420f27238129b4ed2a9851db5fac3d55e98471a",
+  "images_visually_reviewed": 50,
+  "boxes_before": 1182,
+  "boxes_after": 607,
+  "removed": 576,
+  "class_changes": 42,
+  "geometry_adjustments": 2,
+  "added": 1,
+  "class_counts": {
+    "0": 490,
+    "2": 53,
+    "3": 44,
+    "1": 20
+  },
+  "per_image": [
+    {
+      "image": "drive_001",
+      "before": 16,
+      "after": 5,
+      "removed_original_line_ids": [
+        1,
+        3,
+        6,
+        7,
+        8,
+        9,
+        11,
+        13,
+        14,
+        15,
+        16
+      ],
+      "class_changes_original_line_ids": {},
+      "adjusted_box_original_line_ids": [],
+      "added_boxes": 0,
+      "reason": "Curb parking rows outside finalized gold ROI; far indistinct small traffic."
+    },
+    {
+      "image": "drive_002",
+      "before": 41,
+      "after": 13,
+      "removed_original_line_ids": [
+        2,
+        3,
+        8,
+        10,
+        13,
+        16,
+        17,
+        19,
+        20,
+        21,
+        22,
+        23,
+        25,
+        26,
+        27,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "class_changes_original_line_ids": {
+        "5": 0,
+        "28": 0
+      },
+      "adjusted_box_original_line_ids": [],
+      "added_boxes": 0,
+      "reason": "Limit to near traffic ROI; remove distant queue and curb-lane detections. MPV versus box van classification reviewed."
+    },
+    {
+      "image": "drive_003",
+      "before": 54,
+      "after": 18,
+      "removed_original_line_ids": [
+        7,
+        8,
+        11,
+        12,
+        13,
+        18,
+        19,
+        20,
+        22,
+        23,
+        26,
+        27,
+        28,
+        29,
+        32,
+        33,
+        34,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54
+      ],
+      "class_changes_original_line_ids": {
+        "15": 3
+      },
+      "adjusted_box_original_line_ids": [],
+      "added_boxes": 0,
+      "reason": "Remove distant/side-road traffic and occluded far queue behind crossing; keep near intersection vehicles."
+    },
+    {
+      "image": "drive_004",
+      "before": 9,
+      "after": 5,
+      "removed_original_line_ids": [
+        3,
+        5,
+        6,
+        9
+      ],
+      "class_changes_original_line_ids": {
+        "1": 3
+      },
+      "adjusted_box_original_line_ids": [],
+      "added_boxes": 0,
+      "reason": "Exclude far/top and clipped side-route objects; white high cabin vehicle classified as van."
+    },
+    {
+      "image": "drive_005",
+      "before": 31,
+      "after": 20,
+      "removed_original_line_ids": [
+        9,
+        13,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        29,
+        31
+      ],
+      "class_changes_original_line_ids": {},
+      "adjusted_box_original_line_ids": [],
+      "added_boxes": 0,
+      "reason": "Distant queue and parked edge objects outside gold ROI; retain near intersection traffic."
+    },
+    {
+      "image": "drive_006",
+      "before": 38,
+      "after": 21,
+      "removed_original_line_ids": [
+        19,
+        20,
+        22,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38
+      ],
+      "class_changes_original_line_ids": {
+        "13": 3,
+        "23": 0
+      },
+      "adjusted_box_original_line_ids": [],
+      "added_boxes": 0,
+      "reason": "Distant intersection queue and parked right edge excluded; distinguish short MPV from panel van."
+    },
+    {
+      "image": "drive_007",
+      "before": 29,
+      "after": 13,
+      "removed_original_line_ids": [
+        1,
+        2,
+        6,
+        8,
+        9,
+        11,
+        12,
+        14,
+        15,
+        18,
+        22,
+        25,
+        26,
+        27,
+        28,
+        29
+      ],
+      "class_changes_original_line_ids": {
+        "19": 3,
+        "21": 0
+      },
+      "adjusted_box_original_line_ids": [],
+      "added_boxes": 0,
+      "reason": "Remove parked curb rows and far/upper-road parking; review blue van versus dark passenger car."
+    },
+    {
+      "image": "drive_008",
+      "before": 29,
+      "after": 14,
+      "removed_original_line_ids": [
+        2,
+        10,
+        12,
+        13,
+        15,
+        16,
+        18,
+        19,
+        21,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29
+      ],
+      "class_changes_original_line_ids": {
+        "7": 0
+      },
+      "adjusted_box_original_line_ids": [],
+      "added_boxes": 0,
+      "reason": "Exclude curb bus, distant approach, and unidentifiable edge slivers; near white passenger vehicle reviewed."
+    },
+    {
+      "image": "drive_009",
+      "before": 33,
+      "after": 18,
+      "removed_original_line_ids": [
+        3,
+        7,
+        12,
+        13,
+        15,
+        18,
+        19,
+        20,
+        22,
+        23,
+        27,
+        28,
+        30,
+        31,
+        32
+      ],
+      "class_changes_original_line_ids": {},
+      "adjusted_box_original_line_ids": [
+        26
+      ],
+      "added_boxes": 0,
+      "reason": "Exclude far crossroad/parking background; restore full visible white van cab beneath occlusion."
+    },
+    {
+      "image": "drive_010",
+      "before": 8,
+      "after": 5,
+      "removed_original_line_ids": [
+        4,
+        7,
+        8
+      ],
+      "class_changes_original_line_ids": {},
+      "adjusted_box_original_line_ids": [],
+      "added_boxes": 0,
+      "reason": "Parked storefront cars and unidentifiable left-edge fragment excluded from traffic ROI."
+    },
+    {
+      "image": "drive_011",
+      "before": 37,
+      "after": 19,
+      "removed_original_line_ids": [
+        13,
+        16,
+        17,
+        19,
+        21,
+        22,
+        23,
+        24,
+        25,
+        27,
+        28,
+        29,
+        31,
+        33,
+        34,
+        35,
+        36,
+        37
+      ],
+      "class_changes_original_line_ids": {},
+      "adjusted_box_original_line_ids": [],
+      "added_boxes": 0,
+      "reason": "Distant queue and clipped side-road vehicles outside near traffic ROI."
+    },
+    {
+      "image": "drive_012",
+      "before": 44,
+      "after": 22,
+      "removed_original_line_ids": [
+        4,
+        17,
+        19,
+        21,
+        22,
+        24,
+        25,
+        27,
+        28,
+        29,
+        30,
+        31,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        44
+      ],
+      "class_changes_original_line_ids": {
+        "3": 0,
+        "10": 0,
+        "13": 0,
+        "20": 0,
+        "43": 3
+      },
+      "adjusted_box_original_line_ids": [],
+      "added_boxes": 0,
+      "reason": "Remove far intersection and tiny edge fragments; low passenger MPVs treated as car, small high cabin minibus as van."
+    },
+    {
+      "image": "drive_013",
+      "before": 5,
+      "after": 4,
+      "removed_original_line_ids": [
+        5
+      ],
+      "class_changes_original_line_ids": {},
+      "adjusted_box_original_line_ids": [],
+      "added_boxes": 0,
+      "reason": "Only narrow unidentifiable part of far vehicle visible at right edge."
+    },
+    {
+      "image": "drive_014",
+      "before": 28,
+      "after": 13,
+      "removed_original_line_ids": [
+        13,
+        14,
+        15,
+        16,
+        17,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "class_changes_original_line_ids": {},
+      "adjusted_box_original_line_ids": [],
+      "added_boxes": 0,
+      "reason": "Remove background curb queue and near edge sliver outside ROI."
+    },
+    {
+      "image": "drive_015",
+      "before": 10,
+      "after": 9,
+      "removed_original_line_ids": [
+        6
+      ],
+      "class_changes_original_line_ids": {},
+      "adjusted_box_original_line_ids": [],
+      "added_boxes": 0,
+      "reason": "White vehicle parked in storefront row outside road ROI."
+    },
+    {
+      "image": "drive_016",
+      "before": 25,
+      "after": 19,
+      "removed_original_line_ids": [
+        4,
+        10,
+        15,
+        22,
+        23,
+        24
+      ],
+      "class_changes_original_line_ids": {
+        "18": 0,
+        "19": 3
+      },
+      "adjusted_box_original_line_ids": [],
+      "added_boxes": 0,
+      "reason": "Exclude far/top and bottom hood fragment; review passenger MPV and high enclosed van."
+    },
+    {
+      "image": "drive_017",
+      "before": 11,
+      "after": 4,
+      "removed_original_line_ids": [
+        3,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "class_changes_original_line_ids": {},
+      "adjusted_box_original_line_ids": [],
+      "added_boxes": 1,
+      "reason": "Remove parked far curb row; add visible red passenger car on active road."
+    },
+    {
+      "image": "drive_018",
+      "before": 11,
+      "after": 2,
+      "removed_original_line_ids": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        10,
+        11
+      ],
+      "class_changes_original_line_ids": {},
+      "adjusted_box_original_line_ids": [],
+      "added_boxes": 0,
+      "reason": "Parked curb row outside finalized traffic ROI."
+    },
+    {
+      "image": "drive_019",
+      "before": 32,
+      "after": 26,
+      "removed_original_line_ids": [
+        9,
+        26,
+        29,
+        30,
+        31,
+        32
+      ],
+      "class_changes_original_line_ids": {
+        "14": 0,
+        "21": 0
+      },
+      "adjusted_box_original_line_ids": [],
+      "added_boxes": 0,
+      "reason": "Remove far queue and false car stripe on coach; passenger MPV class reviewed."
+    },
+    {
+      "image": "drive_020",
+      "before": 16,
+      "after": 8,
+      "removed_original_line_ids": [
+        6,
+        7,
+        9,
+        11,
+        13,
+        14,
+        15,
+        16
+      ],
+      "class_changes_original_line_ids": {
+        "4": 0
+      },
+      "adjusted_box_original_line_ids": [],
+      "added_boxes": 0,
+      "reason": "Remove background upper parking row; keep recognizable near edge car and classify small cab/pickup as car."
+    },
+    {
+      "image": "drive_021",
+      "before": 13,
+      "after": 4,
+      "removed_original_line_ids": [
+        1,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "class_changes_original_line_ids": {},
+      "adjusted_box_original_line_ids": [],
+      "added_boxes": 0,
+      "reason": "Bus-stop parked background, distant queue, and off-ROI lane at lower right excluded."
+    },
+    {
+      "image": "drive_022",
+      "before": 5,
+      "after": 5,
+      "removed_original_line_ids": [],
+      "class_changes_original_line_ids": {},
+      "adjusted_box_original_line_ids": [],
+      "added_boxes": 0,
+      "reason": "All visible current boxes retained after inspection."
+    },
+    {
+      "image": "drive_023",
+      "before": 9,
+      "after": 4,
+      "removed_original_line_ids": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "class_changes_original_line_ids": {},
+      "adjusted_box_original_line_ids": [],
+      "added_boxes": 0,
+      "reason": "Exclude curb parking row and tiny top fragment."
+    },
+    {
+      "image": "drive_024",
+      "before": 39,
+      "after": 24,
+      "removed_original_line_ids": [
+        13,
+        16,
+        21,
+        22,
+        28,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39
+      ],
+      "class_changes_original_line_ids": {},
+      "adjusted_box_original_line_ids": [],
+      "added_boxes": 0,
+      "reason": "Exclude distant crossing and severely occluded tiny side fragments; retain near traffic."
+    },
+    {
+      "image": "drive_025",
+      "before": 8,
+      "after": 7,
+      "removed_original_line_ids": [
+        5
+      ],
+      "class_changes_original_line_ids": {
+        "8": 0
+      },
+      "adjusted_box_original_line_ids": [],
+      "added_boxes": 0,
+      "reason": "Exclude narrow left-edge fragment; review compact passenger MPV; retain identifiable distant car."
+    },
+    {
+      "image": "drive_026",
+      "before": 41,
+      "after": 37,
+      "removed_original_line_ids": [
+        37,
+        38,
+        39,
+        40
+      ],
+      "class_changes_original_line_ids": {
+        "1": 0,
+        "2": 0,
+        "9": 0,
+        "10": 0,
+        "11": 0,
+        "19": 0,
+        "34": 0
+      },
+      "adjusted_box_original_line_ids": [],
+      "added_boxes": 0,
+      "reason": "Passenger MPVs and taxis treated as car; remove far/background edge detections; retain visible foreground edge taxi."
+    },
+    {
+      "image": "drive_027",
+      "before": 37,
+      "after": 24,
+      "removed_original_line_ids": [
+        15,
+        17,
+        19,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        32,
+        33,
+        34,
+        35
+      ],
+      "class_changes_original_line_ids": {},
+      "adjusted_box_original_line_ids": [],
+      "added_boxes": 0,
+      "reason": "Exclude far crossing/side-lane vehicles and tiny upper/left edge fragments."
+    },
+    {
+      "image": "drive_028",
+      "before": 16,
+      "after": 3,
+      "removed_original_line_ids": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        11,
+        12,
+        13,
+        14,
+        16
+      ],
+      "class_changes_original_line_ids": {},
+      "adjusted_box_original_line_ids": [],
+      "added_boxes": 0,
+      "reason": "Curb parking rows on both sides outside gold ROI."
+    },
+    {
+      "image": "drive_029",
+      "before": 30,
+      "after": 18,
+      "removed_original_line_ids": [
+        12,
+        19,
+        20,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30
+      ],
+      "class_changes_original_line_ids": {},
+      "adjusted_box_original_line_ids": [],
+      "added_boxes": 0,
+      "reason": "Exclude far opposite road and narrow unidentifiable side fragments."
+    },
+    {
+      "image": "drive_030",
+      "before": 40,
+      "after": 19,
+      "removed_original_line_ids": [
+        17,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        27,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ],
+      "class_changes_original_line_ids": {
+        "15": 0,
+        "18": 0
+      },
+      "adjusted_box_original_line_ids": [],
+      "added_boxes": 0,
+      "reason": "Keep near traffic queue; remove distant opposite lane/background; review low passenger MPV class."
+    },
+    {
+      "image": "drive_031",
+      "before": 36,
+      "after": 14,
+      "removed_original_line_ids": [
+        5,
+        9,
+        10,
+        12,
+        14,
+        15,
+        16,
+        19,
+        20,
+        21,
+        23,
+        25,
+        26,
+        27,
+        28,
+        29,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36
+      ],
+      "class_changes_original_line_ids": {
+        "4": 0,
+        "7": 0
+      },
+      "adjusted_box_original_line_ids": [],
+      "added_boxes": 0,
+      "reason": "Remove distant queue and outside lane; keep near passenger vehicles and correct MPV class."
+    },
+    {
+      "image": "drive_032",
+      "before": 6,
+      "after": 5,
+      "removed_original_line_ids": [
+        3
+      ],
+      "class_changes_original_line_ids": {},
+      "adjusted_box_original_line_ids": [],
+      "added_boxes": 0,
+      "reason": "Opposite carriageway vehicle outside task traffic ROI."
+    },
+    {
+      "image": "drive_033",
+      "before": 22,
+      "after": 12,
+      "removed_original_line_ids": [
+        4,
+        9,
+        10,
+        11,
+        14,
+        16,
+        17,
+        19,
+        21,
+        22
+      ],
+      "class_changes_original_line_ids": {},
+      "adjusted_box_original_line_ids": [],
+      "added_boxes": 0,
+      "reason": "Remove distant crossroad traffic and tiny far/right-edge detections outside near ROI."
+    },
+    {
+      "image": "drive_034",
+      "before": 19,
+      "after": 10,
+      "removed_original_line_ids": [
+        9,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "class_changes_original_line_ids": {},
+      "adjusted_box_original_line_ids": [],
+      "added_boxes": 0,
+      "reason": "Exclude background curb queue and clipped top vehicles."
+    },
+    {
+      "image": "drive_035",
+      "before": 12,
+      "after": 6,
+      "removed_original_line_ids": [
+        3,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "class_changes_original_line_ids": {},
+      "adjusted_box_original_line_ids": [],
+      "added_boxes": 0,
+      "reason": "Exclude curb bus-stop parking, far traffic and opposite lower-right lane."
+    },
+    {
+      "image": "drive_036",
+      "before": 18,
+      "after": 6,
+      "removed_original_line_ids": [
+        5,
+        6,
+        8,
+        9,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18
+      ],
+      "class_changes_original_line_ids": {},
+      "adjusted_box_original_line_ids": [],
+      "added_boxes": 0,
+      "reason": "Exclude curb parking and tiny distant traffic; retain identifiable oncoming headlights vehicle."
+    },
+    {
+      "image": "drive_037",
+      "before": 10,
+      "after": 7,
+      "removed_original_line_ids": [
+        2,
+        3,
+        10
+      ],
+      "class_changes_original_line_ids": {},
+      "adjusted_box_original_line_ids": [],
+      "added_boxes": 0,
+      "reason": "Very distant/clipped road traffic and upper road outside sunken-highway ROI."
+    },
+    {
+      "image": "drive_038",
+      "before": 29,
+      "after": 17,
+      "removed_original_line_ids": [
+        1,
+        2,
+        5,
+        8,
+        15,
+        19,
+        21,
+        24,
+        25,
+        26,
+        28,
+        29
+      ],
+      "class_changes_original_line_ids": {},
+      "adjusted_box_original_line_ids": [],
+      "added_boxes": 0,
+      "reason": "Exclude background curb buses/parking, duplicate side fragment and distant queue."
+    },
+    {
+      "image": "drive_039",
+      "before": 22,
+      "after": 11,
+      "removed_original_line_ids": [
+        3,
+        11,
+        12,
+        13,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22
+      ],
+      "class_changes_original_line_ids": {},
+      "adjusted_box_original_line_ids": [],
+      "added_boxes": 0,
+      "reason": "Remove far/top traffic and narrow edge fragments; retain visible foreground vehicles."
+    },
+    {
+      "image": "drive_040",
+      "before": 29,
+      "after": 17,
+      "removed_original_line_ids": [
+        2,
+        12,
+        14,
+        19,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29
+      ],
+      "class_changes_original_line_ids": {},
+      "adjusted_box_original_line_ids": [],
+      "added_boxes": 0,
+      "reason": "Parked curb bus and distant approach outside finalized near intersection ROI."
+    },
+    {
+      "image": "drive_041",
+      "before": 27,
+      "after": 17,
+      "removed_original_line_ids": [
+        15,
+        16,
+        18,
+        20,
+        21,
+        22,
+        23,
+        24,
+        26,
+        27
+      ],
+      "class_changes_original_line_ids": {
+        "13": 3
+      },
+      "adjusted_box_original_line_ids": [],
+      "added_boxes": 0,
+      "reason": "Exclude distant queue and unrecognizable side fragment; identify high-cabin van."
+    },
+    {
+      "image": "drive_042",
+      "before": 9,
+      "after": 4,
+      "removed_original_line_ids": [
+        2,
+        4,
+        5,
+        7,
+        8
+      ],
+      "class_changes_original_line_ids": {},
+      "adjusted_box_original_line_ids": [],
+      "added_boxes": 0,
+      "reason": "Remove distant road/side background; retain near bus, loaded truck and car."
+    },
+    {
+      "image": "drive_043",
+      "before": 29,
+      "after": 13,
+      "removed_original_line_ids": [
+        8,
+        9,
+        11,
+        13,
+        15,
+        16,
+        18,
+        19,
+        20,
+        22,
+        23,
+        24,
+        26,
+        27,
+        28,
+        29
+      ],
+      "class_changes_original_line_ids": {
+        "17": 3
+      },
+      "adjusted_box_original_line_ids": [],
+      "added_boxes": 0,
+      "reason": "Exclude distant/partial background and classify high enclosed light vehicle as van."
+    },
+    {
+      "image": "drive_044",
+      "before": 28,
+      "after": 8,
+      "removed_original_line_ids": [
+        2,
+        5,
+        6,
+        7,
+        8,
+        9,
+        12,
+        13,
+        14,
+        15,
+        16,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        28
+      ],
+      "class_changes_original_line_ids": {
+        "11": 0
+      },
+      "adjusted_box_original_line_ids": [],
+      "added_boxes": 0,
+      "reason": "Remove distant and upper-road traffic; near compact passenger vehicle kept as car."
+    },
+    {
+      "image": "drive_045",
+      "before": 36,
+      "after": 12,
+      "removed_original_line_ids": [
+        1,
+        2,
+        3,
+        4,
+        7,
+        12,
+        13,
+        14,
+        16,
+        20,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36
+      ],
+      "class_changes_original_line_ids": {},
+      "adjusted_box_original_line_ids": [],
+      "added_boxes": 0,
+      "reason": "Remove stationary curb rows and indistinct far traffic outside active carriageway ROI."
+    },
+    {
+      "image": "drive_046",
+      "before": 12,
+      "after": 3,
+      "removed_original_line_ids": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "class_changes_original_line_ids": {},
+      "adjusted_box_original_line_ids": [],
+      "added_boxes": 0,
+      "reason": "Remove distant curb background and top fragments; near tow truck and two cars retained."
+    },
+    {
+      "image": "drive_047",
+      "before": 4,
+      "after": 4,
+      "removed_original_line_ids": [],
+      "class_changes_original_line_ids": {},
+      "adjusted_box_original_line_ids": [],
+      "added_boxes": 0,
+      "reason": "All current near traffic boxes retained after inspection."
+    },
+    {
+      "image": "drive_048",
+      "before": 22,
+      "after": 14,
+      "removed_original_line_ids": [
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22
+      ],
+      "class_changes_original_line_ids": {},
+      "adjusted_box_original_line_ids": [],
+      "added_boxes": 0,
+      "reason": "Remove far opposite-road vehicles and ambiguous left-edge bus fragment."
+    },
+    {
+      "image": "drive_049",
+      "before": 33,
+      "after": 6,
+      "removed_original_line_ids": [
+        2,
+        3,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33
+      ],
+      "class_changes_original_line_ids": {
+        "6": 0
+      },
+      "adjusted_box_original_line_ids": [],
+      "added_boxes": 0,
+      "reason": "Remove curb parking and far/top vehicles; near passenger MPV kept as car."
+    },
+    {
+      "image": "drive_050",
+      "before": 34,
+      "after": 18,
+      "removed_original_line_ids": [
+        6,
+        7,
+        9,
+        11,
+        13,
+        14,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        29,
+        31,
+        33,
+        34
+      ],
+      "class_changes_original_line_ids": {
+        "4": 0,
+        "5": 0,
+        "12": 0,
+        "15": 0,
+        "19": 0,
+        "27": 0,
+        "30": 0
+      },
+      "adjusted_box_original_line_ids": [
+        4
+      ],
+      "added_boxes": 0,
+      "reason": "Exclude parked side/access-road rows; review compact passenger MPVs and small cab vehicle; tighten front car box to visible roof."
+    }
+  ]
+}

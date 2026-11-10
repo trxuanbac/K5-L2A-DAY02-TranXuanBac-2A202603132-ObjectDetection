@@ -34,7 +34,7 @@ Sau lab, bạn có thể:
 | 4 | [GUIDELINE_MINI.md](GUIDELINE_MINI.md) | Mẫu guideline cá nhân **bạn phải điền** | Điền **trước** khi gán nhãn (CP1) |
 | 5 | [RUBRIC.md](RUBRIC.md) | Tiêu chí chấm điểm và mức chất lượng | Đọc trước khi làm để biết cần đạt gì |
 | 6 | [SUBMISSION.md](SUBMISSION.md) | Cách đặt tên repo, cấu trúc nộp, xử lý kết quả Colab | Đối chiếu **trước khi nộp** |
-| 7 | [report/individual/MSSV_HoTen.md](report/individual/MSSV_HoTen.md) | Mẫu báo cáo cá nhân | Điền **cuối cùng**, tập hợp kết quả |
+| 7 | [report/individual/2A202603132_TranXuanBac.md](report/individual/2A202603132_TranXuanBac.md) | Mẫu báo cáo cá nhân | Điền **cuối cùng**, tập hợp kết quả |
 
 > Mẹo: đọc 1–3 và 5 trước buổi lab để nắm rõ ràng phải làm và chấm; điền 4 (guideline) trong buổi; đối chiếu 6 và điền 7 ở giai đoạn nộp.
 
@@ -45,7 +45,7 @@ Sau lab, bạn có thể:
 - `outputs/annotation_evaluation.json`: kết quả chấm sau khi giảng viên phát gold labels.
 - Link Colab đã chạy và ảnh/chỉ số đánh giá model trên tập `eval`.
 
-Điền [báo cáo cá nhân](report/individual/MSSV_HoTen.md) để tập hợp các đầu ra trên; mẫu báo cáo không thêm bài tập hoặc tiêu chí điểm mới.
+Điền [báo cáo cá nhân](report/individual/2A202603132_TranXuanBac.md) để tập hợp các đầu ra trên; mẫu báo cáo không thêm bài tập hoặc tiêu chí điểm mới.
 
 ## Chuẩn bị và bắt đầu
 
@@ -55,7 +55,7 @@ Sau lab, bạn có thể:
 - Gán nhãn rồi **commit và push** `dataset/labels/train/` lên repo của bạn — đây là bản dữ liệu Colab sẽ tự clone.
 - Trên Colab, mở notebook `notebooks/day2_annotation_to_yolo.ipynb` (từ trang GitHub của repo, mở bằng nút Colab, hoặc dán URL repo). Chọn runtime có GPU nếu được cấp. Cell đầu tự clone repo của bạn về Colab — không cần upload file hay zip.
 
-Đọc các file tài liệu theo thứ tự ở mục **Thứ tự đọc tài liệu** ở trên; khi chuẩn bị nộp, đối chiếu [SUBMISSION.md](SUBMISSION.md), [RUBRIC.md](RUBRIC.md) và [mẫu báo cáo](report/individual/MSSV_HoTen.md).
+Đọc các file tài liệu theo thứ tự ở mục **Thứ tự đọc tài liệu** ở trên; khi chuẩn bị nộp, đối chiếu [SUBMISSION.md](SUBMISSION.md), [RUBRIC.md](RUBRIC.md) và [mẫu báo cáo](report/individual/2A202603132_TranXuanBac.md).
 
 ## Cấu trúc thư mục
 
@@ -110,3 +110,7 @@ Chỉ dùng ảnh và nhãn trong phạm vi bài học. Không bổ sung ảnh c
 Theo yêu cầu học viên, đã chạy YOLO26n đủ 50 epoch trực tiếp trên gold đã chốt, với 50 ảnh train và 10 ảnh validation. Xem [báo cáo](report/individual/2A202603132_TranXuanBac.md), [quy trình train gold](report/individual/GOLD_TRAINING.md), và [notebook kết quả local](notebooks/day2_gold_results.ipynb).
 
 Cấu hình runtime gold dùng ID `0=car, 1=van, 2=truck, 3=bus`, phù hợp gold/eval; giữ riêng schema và bộ nhãn học viên đã khóa. Kết quả gold_reference không thay cho điểm QC của nhãn học viên. Gold train và checkpoint được giữ local.
+
+## Tiến độ cá nhân sau rework
+
+Nhãn student sau rework: 50 ảnh, 607 box; CP5 đạt F1 **0,9508**, mean IoU **0,8488**. [Kết quả evaluator](outputs/annotation_evaluation.json) có ánh xạ raw gold sang ID student và hash của nhãn đã chấm; giữ nguyên ngưỡng bài. [Báo cáo](report/individual/2A202603132_TranXuanBac.md) ghi baseline, audit, xác nhận tự rà 10 ảnh CP3 và bằng chứng CVAT. Notebook chuẩn hóa ID trên bản sao eval; không sửa file nguồn hoặc đưa gold lên repo. Còn phiên Colab đã chạy và xác nhận nộp LMS.

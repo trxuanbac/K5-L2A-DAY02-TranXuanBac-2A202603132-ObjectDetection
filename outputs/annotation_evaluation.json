@@ -1,315 +1,426 @@
 {
   "iou_match_threshold": 0.5,
-  "precision": 0.3824,
-  "recall": 0.6922,
-  "f1": 0.4926,
-  "mean_iou_of_matches": 0.8428,
-  "true_positive": 452,
-  "false_positive": 730,
-  "false_negative": 201,
-  "passed": false,
+  "precision": 0.9868,
+  "recall": 0.9173,
+  "f1": 0.9508,
+  "mean_iou_of_matches": 0.8488,
+  "true_positive": 599,
+  "false_positive": 8,
+  "false_negative": 54,
+  "passed": true,
   "required_f1": 0.8,
   "required_mean_iou": 0.7,
   "per_image": [
     {
       "image": "drive_001",
       "gold_boxes": 5,
-      "student_boxes": 16,
+      "student_boxes": 5,
       "matches": 5
     },
     {
       "image": "drive_002",
       "gold_boxes": 13,
-      "student_boxes": 41,
-      "matches": 9
+      "student_boxes": 13,
+      "matches": 13
     },
     {
       "image": "drive_003",
       "gold_boxes": 18,
-      "student_boxes": 54,
-      "matches": 17
+      "student_boxes": 18,
+      "matches": 18
     },
     {
       "image": "drive_004",
       "gold_boxes": 5,
-      "student_boxes": 9,
-      "matches": 3
+      "student_boxes": 5,
+      "matches": 5
     },
     {
       "image": "drive_005",
       "gold_boxes": 24,
-      "student_boxes": 31,
-      "matches": 16
+      "student_boxes": 20,
+      "matches": 19
     },
     {
       "image": "drive_006",
       "gold_boxes": 21,
-      "student_boxes": 38,
-      "matches": 18
+      "student_boxes": 21,
+      "matches": 21
     },
     {
       "image": "drive_007",
       "gold_boxes": 13,
-      "student_boxes": 29,
-      "matches": 12
+      "student_boxes": 13,
+      "matches": 13
     },
     {
       "image": "drive_008",
       "gold_boxes": 16,
-      "student_boxes": 29,
-      "matches": 8
+      "student_boxes": 14,
+      "matches": 13
     },
     {
       "image": "drive_009",
       "gold_boxes": 21,
-      "student_boxes": 33,
-      "matches": 8
+      "student_boxes": 18,
+      "matches": 17
     },
     {
       "image": "drive_010",
       "gold_boxes": 5,
-      "student_boxes": 8,
+      "student_boxes": 5,
       "matches": 5
     },
     {
       "image": "drive_011",
       "gold_boxes": 19,
-      "student_boxes": 37,
-      "matches": 17
+      "student_boxes": 19,
+      "matches": 19
     },
     {
       "image": "drive_012",
       "gold_boxes": 23,
-      "student_boxes": 44,
-      "matches": 14
+      "student_boxes": 22,
+      "matches": 22
     },
     {
       "image": "drive_013",
       "gold_boxes": 4,
-      "student_boxes": 5,
+      "student_boxes": 4,
       "matches": 4
     },
     {
       "image": "drive_014",
       "gold_boxes": 14,
-      "student_boxes": 28,
-      "matches": 10
+      "student_boxes": 13,
+      "matches": 13
     },
     {
       "image": "drive_015",
       "gold_boxes": 12,
-      "student_boxes": 10,
-      "matches": 7
+      "student_boxes": 9,
+      "matches": 9
     },
     {
       "image": "drive_016",
       "gold_boxes": 19,
-      "student_boxes": 25,
-      "matches": 17
+      "student_boxes": 19,
+      "matches": 19
     },
     {
       "image": "drive_017",
-      "gold_boxes": 4,
-      "student_boxes": 11,
-      "matches": 3
-    },
-    {
-      "image": "drive_018",
-      "gold_boxes": 2,
-      "student_boxes": 11,
-      "matches": 1
-    },
-    {
-      "image": "drive_019",
-      "gold_boxes": 27,
-      "student_boxes": 32,
-      "matches": 20
-    },
-    {
-      "image": "drive_020",
-      "gold_boxes": 8,
-      "student_boxes": 16,
-      "matches": 6
-    },
-    {
-      "image": "drive_021",
-      "gold_boxes": 4,
-      "student_boxes": 13,
-      "matches": 2
-    },
-    {
-      "image": "drive_022",
-      "gold_boxes": 5,
-      "student_boxes": 5,
-      "matches": 3
-    },
-    {
-      "image": "drive_023",
-      "gold_boxes": 4,
-      "student_boxes": 9,
-      "matches": 3
-    },
-    {
-      "image": "drive_024",
-      "gold_boxes": 30,
-      "student_boxes": 39,
-      "matches": 19
-    },
-    {
-      "image": "drive_025",
-      "gold_boxes": 7,
-      "student_boxes": 8,
-      "matches": 4
-    },
-    {
-      "image": "drive_026",
-      "gold_boxes": 39,
-      "student_boxes": 41,
-      "matches": 22
-    },
-    {
-      "image": "drive_027",
-      "gold_boxes": 31,
-      "student_boxes": 37,
-      "matches": 19
-    },
-    {
-      "image": "drive_028",
-      "gold_boxes": 3,
-      "student_boxes": 16,
-      "matches": 3
-    },
-    {
-      "image": "drive_029",
-      "gold_boxes": 19,
-      "student_boxes": 30,
-      "matches": 12
-    },
-    {
-      "image": "drive_030",
-      "gold_boxes": 20,
-      "student_boxes": 40,
-      "matches": 13
-    },
-    {
-      "image": "drive_031",
-      "gold_boxes": 14,
-      "student_boxes": 36,
-      "matches": 11
-    },
-    {
-      "image": "drive_032",
-      "gold_boxes": 5,
-      "student_boxes": 6,
-      "matches": 5
-    },
-    {
-      "image": "drive_033",
-      "gold_boxes": 12,
-      "student_boxes": 22,
-      "matches": 9
-    },
-    {
-      "image": "drive_034",
-      "gold_boxes": 10,
-      "student_boxes": 19,
-      "matches": 9
-    },
-    {
-      "image": "drive_035",
-      "gold_boxes": 6,
-      "student_boxes": 12,
-      "matches": 5
-    },
-    {
-      "image": "drive_036",
-      "gold_boxes": 6,
-      "student_boxes": 18,
-      "matches": 4
-    },
-    {
-      "image": "drive_037",
-      "gold_boxes": 7,
-      "student_boxes": 10,
-      "matches": 6
-    },
-    {
-      "image": "drive_038",
-      "gold_boxes": 17,
-      "student_boxes": 29,
-      "matches": 14
-    },
-    {
-      "image": "drive_039",
-      "gold_boxes": 11,
-      "student_boxes": 22,
-      "matches": 7
-    },
-    {
-      "image": "drive_040",
-      "gold_boxes": 19,
-      "student_boxes": 29,
-      "matches": 12
-    },
-    {
-      "image": "drive_041",
-      "gold_boxes": 24,
-      "student_boxes": 27,
-      "matches": 11
-    },
-    {
-      "image": "drive_042",
-      "gold_boxes": 4,
-      "student_boxes": 9,
-      "matches": 1
-    },
-    {
-      "image": "drive_043",
-      "gold_boxes": 13,
-      "student_boxes": 29,
-      "matches": 12
-    },
-    {
-      "image": "drive_044",
-      "gold_boxes": 8,
-      "student_boxes": 28,
-      "matches": 6
-    },
-    {
-      "image": "drive_045",
-      "gold_boxes": 15,
-      "student_boxes": 36,
-      "matches": 12
-    },
-    {
-      "image": "drive_046",
-      "gold_boxes": 3,
-      "student_boxes": 12,
-      "matches": 2
-    },
-    {
-      "image": "drive_047",
       "gold_boxes": 4,
       "student_boxes": 4,
       "matches": 3
     },
     {
+      "image": "drive_018",
+      "gold_boxes": 2,
+      "student_boxes": 2,
+      "matches": 2
+    },
+    {
+      "image": "drive_019",
+      "gold_boxes": 27,
+      "student_boxes": 26,
+      "matches": 26
+    },
+    {
+      "image": "drive_020",
+      "gold_boxes": 8,
+      "student_boxes": 8,
+      "matches": 7
+    },
+    {
+      "image": "drive_021",
+      "gold_boxes": 4,
+      "student_boxes": 4,
+      "matches": 4
+    },
+    {
+      "image": "drive_022",
+      "gold_boxes": 5,
+      "student_boxes": 5,
+      "matches": 5
+    },
+    {
+      "image": "drive_023",
+      "gold_boxes": 4,
+      "student_boxes": 4,
+      "matches": 4
+    },
+    {
+      "image": "drive_024",
+      "gold_boxes": 30,
+      "student_boxes": 24,
+      "matches": 24
+    },
+    {
+      "image": "drive_025",
+      "gold_boxes": 7,
+      "student_boxes": 7,
+      "matches": 6
+    },
+    {
+      "image": "drive_026",
+      "gold_boxes": 39,
+      "student_boxes": 37,
+      "matches": 36
+    },
+    {
+      "image": "drive_027",
+      "gold_boxes": 31,
+      "student_boxes": 24,
+      "matches": 24
+    },
+    {
+      "image": "drive_028",
+      "gold_boxes": 3,
+      "student_boxes": 3,
+      "matches": 3
+    },
+    {
+      "image": "drive_029",
+      "gold_boxes": 19,
+      "student_boxes": 18,
+      "matches": 18
+    },
+    {
+      "image": "drive_030",
+      "gold_boxes": 20,
+      "student_boxes": 19,
+      "matches": 19
+    },
+    {
+      "image": "drive_031",
+      "gold_boxes": 14,
+      "student_boxes": 14,
+      "matches": 14
+    },
+    {
+      "image": "drive_032",
+      "gold_boxes": 5,
+      "student_boxes": 5,
+      "matches": 5
+    },
+    {
+      "image": "drive_033",
+      "gold_boxes": 12,
+      "student_boxes": 12,
+      "matches": 12
+    },
+    {
+      "image": "drive_034",
+      "gold_boxes": 10,
+      "student_boxes": 10,
+      "matches": 10
+    },
+    {
+      "image": "drive_035",
+      "gold_boxes": 6,
+      "student_boxes": 6,
+      "matches": 6
+    },
+    {
+      "image": "drive_036",
+      "gold_boxes": 6,
+      "student_boxes": 6,
+      "matches": 5
+    },
+    {
+      "image": "drive_037",
+      "gold_boxes": 7,
+      "student_boxes": 7,
+      "matches": 7
+    },
+    {
+      "image": "drive_038",
+      "gold_boxes": 17,
+      "student_boxes": 17,
+      "matches": 17
+    },
+    {
+      "image": "drive_039",
+      "gold_boxes": 11,
+      "student_boxes": 11,
+      "matches": 11
+    },
+    {
+      "image": "drive_040",
+      "gold_boxes": 19,
+      "student_boxes": 17,
+      "matches": 17
+    },
+    {
+      "image": "drive_041",
+      "gold_boxes": 24,
+      "student_boxes": 17,
+      "matches": 17
+    },
+    {
+      "image": "drive_042",
+      "gold_boxes": 4,
+      "student_boxes": 4,
+      "matches": 4
+    },
+    {
+      "image": "drive_043",
+      "gold_boxes": 13,
+      "student_boxes": 13,
+      "matches": 13
+    },
+    {
+      "image": "drive_044",
+      "gold_boxes": 8,
+      "student_boxes": 8,
+      "matches": 8
+    },
+    {
+      "image": "drive_045",
+      "gold_boxes": 15,
+      "student_boxes": 12,
+      "matches": 12
+    },
+    {
+      "image": "drive_046",
+      "gold_boxes": 3,
+      "student_boxes": 3,
+      "matches": 3
+    },
+    {
+      "image": "drive_047",
+      "gold_boxes": 4,
+      "student_boxes": 4,
+      "matches": 4
+    },
+    {
       "image": "drive_048",
       "gold_boxes": 16,
-      "student_boxes": 22,
-      "matches": 9
+      "student_boxes": 14,
+      "matches": 14
     },
     {
       "image": "drive_049",
       "gold_boxes": 6,
-      "student_boxes": 33,
-      "matches": 5
+      "student_boxes": 6,
+      "matches": 6
     },
     {
       "image": "drive_050",
       "gold_boxes": 18,
-      "student_boxes": 34,
-      "matches": 9
+      "student_boxes": 18,
+      "matches": 18
     }
-  ]
+  ],
+  "student_labels_sha256": {
+    "drive_001.txt": "2a3ab14e75161c78301306961dcf893cd9d04504fd19920874c071a5814a6d17",
+    "drive_002.txt": "76b941514429ef999732f5ced63ee8746b5b2d3c4222f7eb6a11bd064a43f2e8",
+    "drive_003.txt": "4aa486f57aa946d1ab9b244ceaf3c206b8d90f25b16ff233679e2f062b6d41e0",
+    "drive_004.txt": "d5b0fe2abe611e2b9b16011e17c954f03cf670ba760f49d64eacd8dd8a312760",
+    "drive_005.txt": "e37e92ee57d3579361d607b86eb50e7e8a43268411d99bf3e4629b4ba85230ed",
+    "drive_006.txt": "75d0a37a4cc9d36fab6bab1721cbb6fe4390b2f1f56c23919cbf6a1382071c97",
+    "drive_007.txt": "585f6e725348a31dab6365e19d2ce8aa714773ff66c20c56ab1c80776f76a869",
+    "drive_008.txt": "1150c2686c218ab2029d50fb4f586b0a88a72f858d4cdb7fcb5f4454dbfae829",
+    "drive_009.txt": "93c0bb14003ebae24939c848e229903656b7b3f30d4247e0fc943ce68ba37b9a",
+    "drive_010.txt": "a373c0027b85ef2142cde0f636b24de1ba0a1a00281b8fa295b36f020159b39c",
+    "drive_011.txt": "618155e98d542357441c744de1e2cd898c2fea2c291e12ff9722a8adbc1b46b6",
+    "drive_012.txt": "83184d41057299ec93d9e7a7944dc7b6b36eb9cf03dca1609b4731f08078c015",
+    "drive_013.txt": "b9f15c24c3ab9f08552e44eda645aae022463e61f2f4a4dfe12d9cc8e83f5e67",
+    "drive_014.txt": "6608e88b709a43252b768c136cdc0227e60f8c511b6d00becb75228ce5e4db6d",
+    "drive_015.txt": "a372e9c24e00206d445478da8c48e5b26e24e1f89ef002eff9c298bf80692370",
+    "drive_016.txt": "4ca4f3269aceb3050225aad3e6ea009ebd4d1794e2247d2e865fdffb60758507",
+    "drive_017.txt": "ea9b3eb99dc131645df177ed627a822d9b7d4866a09014c12a8ef8bbfbeb8f83",
+    "drive_018.txt": "a2927ab80f5bcb004c96a820207d5462f3b48ee2e0bad57d29494f46bab955aa",
+    "drive_019.txt": "4a5db6f092b56c8288ea5d8b22f56f09a79d784199ca0879abd15f786b89dee8",
+    "drive_020.txt": "d5dcff3720e3f921bbb99c5c8a31cec4664f459c27936e7a25dd7f02a34c839d",
+    "drive_021.txt": "ef7ab0034108a0ff4f05a0f4dd06cb4e80b2501b40cdab843213a689ea94c714",
+    "drive_022.txt": "2844a74e51753ad5b3e552e8efa2ce561990e0ae4bcaa383ed689102bf1d87b5",
+    "drive_023.txt": "c5320137809362f2fe3de492bc4069b39eb3447acbaa28decbc9b056c947382d",
+    "drive_024.txt": "93ebc5ac39a986cd1765a9b938509370def69c7bd09878d17b43ea558ed55f09",
+    "drive_025.txt": "6cc6c0328aba38d0ca76a6e38bf86c31c51610184a14b4fd0d91b5f86e765604",
+    "drive_026.txt": "a7e71186345efbf53519053e4ef151e37bf2ad4d6251c2d9a82d97f8c70a64b3",
+    "drive_027.txt": "7f849af62e3d64a3da01ab46e1c13d4958bc00990da61affd3a47b29a6baa1a0",
+    "drive_028.txt": "dba818973564e1cdfed06c0b0550d097d2a861ae54487d3c34280ec84a62b9ef",
+    "drive_029.txt": "fcb009eb44ea0b6faeaeaf09cdf4c3b76b8e47948e44f923e62d12eb8795b7a1",
+    "drive_030.txt": "ee062e42421267672aa196524709466e5daa7058f5ee46c47557fd60c05d271a",
+    "drive_031.txt": "bc9eae477084d0db0f5f140f38334b63d09016eb35c68bd1893c7e31dfbb4764",
+    "drive_032.txt": "7e2d4a8257794bbe22d0f17b1e59230a647dad772eabb368ef5108ba3142fd38",
+    "drive_033.txt": "527fb02d05ab4b8700097293b80b93e98c016f7a22e42436f984640fc7d7af51",
+    "drive_034.txt": "36b1ffcf8e9b4266514ebd4580bfdbcdae3d61b48fb61f1b9ff585fb7ce0ccca",
+    "drive_035.txt": "df5df70dc44eef6a1a798fc6f1b09b8d169a975b29b5144e9b1d237780b8a2a7",
+    "drive_036.txt": "3b1afd813510916bfa5fb88a78a5b55b8aefb3d2f2e98d47882095fc83dd46eb",
+    "drive_037.txt": "ab4d9793b68f2cdc059170573687396f3de7e908712c9fa8dcdd0fdb6917a15f",
+    "drive_038.txt": "3c95cab433b160013e3cbd814264271f6470ac5859da6d3c2225cdc97dc8c294",
+    "drive_039.txt": "55723645864cda1f4c30635decb5d6b86bd1e12eaa7e143565a6895317f33c1f",
+    "drive_040.txt": "956c67893c5ea931b22611bd0f17fcf28c648ab9c3895fe1691584cda1708e09",
+    "drive_041.txt": "d94a62a0b3144a88ab9decbd07caa19822d8f2c766a1d4c915e12dab98bd673e",
+    "drive_042.txt": "a2ea49a07aa35d8be944b0a6ef04ff3a53ff8ba9d79156b588589b549f2d2efb",
+    "drive_043.txt": "4ef409b8d8f8fe671c942861ec296719906deddc3f5e20bee95096f95b39c946",
+    "drive_044.txt": "7bfb65f5fab5c2e03ffb165e155864f144e3e7a2a8d7503d7ae32cdc409c80b8",
+    "drive_045.txt": "4d2a4596c25c8ee888415b8d8cd25373a402191ef92ca3f0e76c9675303f8a07",
+    "drive_046.txt": "257d377eb2a5d40abf3dfe48e90b613259ebefe85327b8bc52b0b2e04ccb108d",
+    "drive_047.txt": "5c3a7f92e3153cbc8c29120e3c311e3df66add63d9344c30a7ce8d29037ae979",
+    "drive_048.txt": "39a4727595110fa96b15a70beef399bbcd7266f74e809972deb9aa53b2800002",
+    "drive_049.txt": "51a13fd009b57d3e790c777212c49f8becae8e9a53b780f1bfe246d96e43c084",
+    "drive_050.txt": "aff8b2e990d7a08740e4f92aaab57dd86d4d456083c0fccc89d1fb1b7a4cc9a0"
+  },
+  "gold_labels_sha256": {
+    "drive_001.txt": "751c734ae297cd5206d15393fee09eef696c770023a328fcdc3b4debf1ee6062",
+    "drive_002.txt": "2af084d15f329161a1b5a793a85aff253d5f28698560266723dde6cd50c0fe6c",
+    "drive_003.txt": "d6615f774cf93260996afb41390d6ad3ab01bb876519e1a9cf521ec58d5158f4",
+    "drive_004.txt": "4229174b5b2f9afda014659b5d1a695c98caf4a3868d8179cff9165ff10ad0eb",
+    "drive_005.txt": "a965c90a9a8d475de6c136573e00612c419c0aba5e7383c2f9d5a97fdd439fa1",
+    "drive_006.txt": "ecf1e032e30e3282f1112391792ee22ac9afc919d439b4984308af3022fc2e06",
+    "drive_007.txt": "43c532933121239e0c60b620716c4cc5cbd09200ec30d51c59c4ae76cf606534",
+    "drive_008.txt": "1b6198fa69cab46386a4b04324b4751ff3470aa5e69d266359f60149d9146a0a",
+    "drive_009.txt": "8c8f2a26a5187394a2f4ce291f9e0293ec55cbafc0a55ec6d7ebdef02887557a",
+    "drive_010.txt": "beeb9df493aaaaf7578bed848fe8df64afa8da95f2f900b2bbdc233b5ae27a00",
+    "drive_011.txt": "326578bca61b80908769a8051c582bf2e9c727bbfa57c6476c05692607f3c88e",
+    "drive_012.txt": "ef5127d347da7662f12e649e91b957205f9a30e14e034207dfde7c7880086a4d",
+    "drive_013.txt": "481771fd729dab49a19bbff626cf79e776aa585bc0815684f1124b9db67e6670",
+    "drive_014.txt": "b480b0beb52fb00ced708a4ea3e0271adcc852704a1c57f4fbc2b6c9594ba284",
+    "drive_015.txt": "f406634f73482fad18f530bd23d21b95554d6ea32661a28f1e0dd18540c7ca65",
+    "drive_016.txt": "edd5a9bb6426b401c695c1261bcf40ccf693e44fbd9ee12118cb934ddcd7669d",
+    "drive_017.txt": "c768ac376c4ddf1a4229c690d9d8cc4f8f1a33219e2d869aa734a1b94e8f2588",
+    "drive_018.txt": "1a941b7c7eab1b788ee705760ad9e25b7ae6384e5be8de7870fd935ce783969e",
+    "drive_019.txt": "5aa37b1c4a4093c2addea99cb477a79ab191e171f6e57c456bcfe2efe53825eb",
+    "drive_020.txt": "dac927172e9cad6f80e982ddbefd36641fe95f64d4e68fc343e33d7c160c842a",
+    "drive_021.txt": "e3485278665dec6631cdac777ae03cce8649eceb442f65ba1bc5e5f0ff23dbc6",
+    "drive_022.txt": "4ffd3e61a89fd2ba8c11ba379619d0a302d68b3ad1c3ddaa53f3dc8463ef1af7",
+    "drive_023.txt": "8eea246fce54efad9a60b7ae387e67a030c4d5e573a68906cfc1d841e139e7cf",
+    "drive_024.txt": "45f3bfd59d3b4d73c04aa0db451d7a8e685a1d8b2141d365c27b0d5437e786ca",
+    "drive_025.txt": "bbe523b7bd7b5dddf5aea35eb4de8082bbddab4890ac3cad41d771397f19af69",
+    "drive_026.txt": "f209f8f2cb105cb56085944733f5b96e58a7df5db09c1d033630d86d81cf70b9",
+    "drive_027.txt": "661e1af1538ae98d60feae0b5dee26211f804d86cfbfdb0d78dcf3d11121b900",
+    "drive_028.txt": "9e6a32a506b4470e774d07ad538610b570810cea6d0e2538136c822e4584c5a9",
+    "drive_029.txt": "66a1dd15af8130559854468cbf459ad7e3b49da0c0d640c51449020e668e9b99",
+    "drive_030.txt": "3cafc14ac9825103e321b48a80fbde4cb5d6b93677c2b12726b97e7863ac466f",
+    "drive_031.txt": "077388a5f1196226bf4b99660a726c1436e9be2a03a1ad2316cde316d29bed3b",
+    "drive_032.txt": "cf732da4d785d668686c791402f29699bd2a04621586091745d3cc661a670e21",
+    "drive_033.txt": "eaad138075bc47f82100fb24382e8083494977ace814196f68c3777b1901e1b7",
+    "drive_034.txt": "3df49e4287cdcf95aa905d83308d900262982493c1921dac286ddd26fcd3caf2",
+    "drive_035.txt": "bf2b70adb88e457b371d96b9a35170812214030ddb8f0cf8953bcbf53a9cf55f",
+    "drive_036.txt": "f28ba7f2f270061ab40b89edeb71db5a1f1510399f17d1a65ccfac30b1da73ae",
+    "drive_037.txt": "d98d9bd693ba2c580ce95301ecc3e86fc9822a046c4f682511645e9581fad013",
+    "drive_038.txt": "796fda977f4f3b30ebf59befcd049a83b724c40c02bf9aab5b6be96c2f87fe6f",
+    "drive_039.txt": "e67d90298976e6c97b4bea808fdb0730a7a497f73237dd16e14f0a98c3e0e489",
+    "drive_040.txt": "f2fa0233d7d5a9eded2e9779ee7df551be23a98f012c04287a1892732873d077",
+    "drive_041.txt": "1c9334ac4d4659764f5b909358bcfcf51d2c39b310c038ed88fdfba2b0a28b34",
+    "drive_042.txt": "b8fa8a129cdabed2be0de82b9c151d1eb70e69d19e71d6578906bb51cf87e456",
+    "drive_043.txt": "199e4e4c1be26ce21853777c767749c49e482715304de2f369cefd38fa17b705",
+    "drive_044.txt": "b6ccce15cef024185ac3eb7854a3f58f66ea28062241ab90d6c3bc5e17965e12",
+    "drive_045.txt": "9c0fb20e2e677a518686c6234918708a9bceb90f429a1c77dc45d02d5c8697b4",
+    "drive_046.txt": "7cdf396375d742047cc61cce6909b3c3499ec0ab0f45767878d8e785bc44461f",
+    "drive_047.txt": "fad3276757e0069609b4a7a9366898cc2bbfa21dc1c5abedddbbd4d8e5a7fedf",
+    "drive_048.txt": "2a551e056ccdb04b9f5dfc4932ed18025183a7db1b37e5ce2359a45804aff6dc",
+    "drive_049.txt": "6ccd93bdc7093a7122d897ca38a675dc1b767e8e8fd1e1937267fd7ab470d990",
+    "drive_050.txt": "29e838544f902875cd191557aecfff66e06641fb2ddf9bcb023dc13d304b5e84"
+  },
+  "gold_class_map": {
+    "0": 0,
+    "1": 3,
+    "2": 1,
+    "3": 2
+  },
+  "class_id_space": "student: 0=car, 1=truck, 2=bus, 3=van"
 }

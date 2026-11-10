@@ -52,3 +52,7 @@ Eval đồng thời làm validation chọn best checkpoint, nên các chỉ số
 - mAP50–95: 0.451602.
 
 [Chỉ số model](assets/model_eval_metrics_gold.json) và [đồ thị train](assets/yolo26_runs/vehicle_gold/results.png). Notebook kết quả đọc artifact thật của phiên local, không phải phiên huấn luyện Colab.
+
+## Cập nhật sau thí nghiệm
+
+Sau phiên gold_reference, nhãn student đã được rework và chấm riêng: F1 0,9508, mean IoU 0,8488, đạt gate. Xem CP5 trong báo cáo cá nhân. Phiên model và bốn chỉ số ở tài liệu này vẫn thuộc bộ 653 box gold; chưa phải model train từ 607 box student sau rework.

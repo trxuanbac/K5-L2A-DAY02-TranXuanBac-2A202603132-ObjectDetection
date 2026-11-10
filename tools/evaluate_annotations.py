@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import sys
 from dataclasses import dataclass
@@ -44,6 +45,24 @@ def parse_yolo(path: Path) -> list[Box]:
     return boxes
 
 
+def parse_class_map(value: str) -> dict[int, int]:
+    """Parse an explicit gold-ID -> student-ID bijection; never edit gold files."""
+    try:
+        pairs = [tuple(map(int, item.split(':'))) for item in value.split(',')]
+        if any(len(pair) != 2 for pair in pairs):
+            raise ValueError
+        result = dict(pairs)
+    except (TypeError, ValueError):
+        raise argparse.ArgumentTypeError('Dùng dạng gold_id:student_id, ví dụ 0:0,1:3,2:1,3:2') from None
+    if len(pairs) != 4 or set(result) != {0, 1, 2, 3} or set(result.values()) != {0, 1, 2, 3}:
+        raise argparse.ArgumentTypeError('Ánh xạ phải là song ánh đủ bốn ID 0,1,2,3')
+    return result
+
+
+def remap_boxes(boxes: list[Box], class_map: dict[int, int]) -> list[Box]:
+    return [Box(class_map[b.class_id], b.x_center, b.y_center, b.width, b.height) for b in boxes]
+
+
 def iou(first: Box, second: Box) -> float:
     ax1, ay1, ax2, ay2 = first.corners
     bx1, by1, bx2, by2 = second.corners
@@ -81,16 +100,24 @@ def main() -> int:
     parser.add_argument("--min-f1", type=float, default=0.80)
     parser.add_argument("--min-mean-iou", type=float, default=0.70)
     parser.add_argument("--output", type=Path, default=Path("outputs/annotation_evaluation.json"))
+    parser.add_argument("--gold-class-map", type=parse_class_map, default=None,
+                        help="Ánh xạ gold-ID sang student-ID khi hai nguồn dùng thứ tự lớp khác nhau; không sửa gold")
     args = parser.parse_args()
 
     gold_files = sorted(args.gold_labels.glob("*.txt"))
     if not gold_files:
         raise SystemExit(f"Không có gold labels trong {args.gold_labels}. Hãy đợi giảng viên phát ground truth.")
+    missing = [p.name for p in gold_files if not (args.student_labels / p.name).is_file()]
+    unexpected = sorted({p.name for p in args.student_labels.glob('*.txt')} - {p.name for p in gold_files})
+    if missing or unexpected:
+        raise SystemExit(f"Tên file student/gold không khớp; thiếu={missing[:5]}, thừa={unexpected[:5]}")
     true_positive = false_positive = false_negative = 0
     overlaps = []
     per_image = []
     for gold_file in gold_files:
         gold = parse_yolo(gold_file)
+        if args.gold_class_map is not None:
+            gold = remap_boxes(gold, args.gold_class_map)
         student = parse_yolo(args.student_labels / gold_file.name)
         matched = match(student, gold, args.iou_threshold)
         true_positive += len(matched)
@@ -117,7 +144,17 @@ def main() -> int:
         "required_f1": args.min_f1,
         "required_mean_iou": args.min_mean_iou,
         "per_image": per_image,
+        "student_labels_sha256": {
+            p.name: hashlib.sha256((args.student_labels / p.name).read_bytes()).hexdigest()
+            for p in gold_files
+        },
+        "gold_labels_sha256": {
+            p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in gold_files
+        },
     }
+    if args.gold_class_map is not None:
+        result['gold_class_map'] = args.gold_class_map
+        result['class_id_space'] = 'student: 0=car, 1=truck, 2=bus, 3=van'
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(json.dumps(result, indent=2, ensure_ascii=False))

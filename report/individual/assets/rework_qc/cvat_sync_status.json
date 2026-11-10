@@ -1,0 +1,9 @@
+{
+  "job": 5,
+  "task": 5,
+  "images": 50,
+  "boxes": 607,
+  "verified_readback": true,
+  "source": "auto",
+  "date": "2026-11-10"
+}

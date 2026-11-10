@@ -1,0 +1,11 @@
+{
+  "notebook_schema_valid": true,
+  "code_cells_parse": true,
+  "qc_gate_executed": true,
+  "ultralytics_dataset_check": true,
+  "train_images": 50,
+  "eval_images": 10,
+  "source_eval_hash_unchanged": true,
+  "training_executed": false,
+  "colab_executed": false
+}
