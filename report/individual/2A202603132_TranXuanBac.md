@@ -7,7 +7,7 @@
 - Lớp: L2A.
 - Email: Bxuan964@gmail.com (theo cấu hình Git local).
 - Repo bài làm: https://github.com/trxuanbac/K5-L2A-DAY02-TranXuanBac-2A202603132-ObjectDetection.
-- [Mở notebook trên Colab](https://colab.research.google.com/github/trxuanbac/K5-L2A-DAY02-TranXuanBac-2A202603132-ObjectDetection/blob/main/notebooks/day2_annotation_to_yolo.ipynb). Chưa có phiên Colab đã chạy.
+- [Notebook Colab học viên đã chạy](https://colab.research.google.com/drive/1YR1tewJQCXHockB095uWxlC7hF9NdBQC#scrollTo=FX-WEVywQc3L). Học viên xác nhận chạy xong ngày 10/11/2026; đang chờ đọc output và nhập artifact của phiên này.
 - [Notebook kết quả thí nghiệm gold](../../notebooks/day2_gold_results.ipynb): đọc artifact của phiên train local; không phải phiên train Colab.
 
 ## 2. Schema và mini guideline
@@ -101,7 +101,7 @@ Thí nghiệm gold_reference dưới đây đã chạy trước rework, dùng tr
 - Train: đúng 50 ảnh, **653 box gold**; validation: đúng 10 ảnh và 113 box. Không đưa eval vào train.
 - Raw ID gold/eval: `0=car, 1=van, 2=truck, 3=bus`. Cấu hình runtime `outputs/gold_training/data_gold.yaml` dùng mapping này; `data.yaml` và nhãn CP4 vẫn giữ bản gốc.
 - Best checkpoint local: `outputs/gold_training/yolo26_runs/vehicle_gold/weights/best.pt`.
-- Chưa có phiên Google Colab đã train. Notebook kết quả đọc artifact của lần train CLI local và hiển thị kết quả thực tế; có thể mở notebook để xem hoặc chạy lại phần đọc artifact.
+- Notebook kết quả gold_reference đọc artifact của lần train CLI local. Học viên sau đó cung cấp phiên Colab riêng ở mục 6a; chưa dùng số liệu local làm kết quả cho phiên Colab đó.
 
 Kết quả validation của **best checkpoint** (không lấy số của epoch cuối):
 
@@ -135,14 +135,27 @@ Trả lời bốn câu hỏi:
 
 Tại thời điểm train gold_reference, gold gốc, nhãn eval và nhãn học viên được kiểm tra hash giữ nguyên sau train. Nhãn student được rework sau đó, có audit riêng ở CP5. Không commit gold train, checkpoint hoặc ảnh train_batch có chứa box gold. Lần train có MPS không bảo đảm deterministic từng bit, dù có đặt seed.
 
+## 6a. Phiên Colab học viên đã chạy
+
+[Notebook Colab](https://colab.research.google.com/drive/1YR1tewJQCXHockB095uWxlC7hF9NdBQC#scrollTo=FX-WEVywQc3L) do học viên cung cấp ngày 10/11/2026 cùng xác nhận đã chạy xong. Khi truy cập từ công cụ hiện tại, đường tải Drive chuyển sang đăng nhập Google; chưa đọc được output hoặc xác định bộ nhãn của phiên đó. Chưa nhập metrics, log theo epoch hoặc 10 ảnh prediction từ phiên này. Các số ở mục 6 vẫn thuộc gold_reference local.
+
+Bốn câu dưới đây lấy từ notebook gốc trong repo; cần đối chiếu lại với bản Colab khi đọc được nội dung.
+
+1. **Lớp nào có recall thấp nhất? Chỉ ra một ảnh eval minh họa.** Cần bảng validation theo lớp và ảnh prediction của chính phiên Colab để điền tên lớp, recall và ảnh cụ thể. Chưa dùng kết luận van từ gold_reference local cho phiên mới.
+2. **Nếu mAP50 cao nhưng mAP50–95 thấp, box đang gặp vấn đề gì?** Model khớp nhiều vật thể ở ngưỡng IoU 0,50 nhưng mất điểm khi yêu cầu box sát hơn ở các ngưỡng đến 0,95. Cần mở prediction để kiểm tra box lệch tâm, quá rộng/hẹp hoặc lấy thừa nền, nhất là xe bị che/cắt khung. Chênh lệch này gợi ý vấn đề định vị; tự nó chưa chứng minh nhãn train sai. Điền hai giá trị mAP thực tế khi nhận output.
+3. **Có lỗi truck/bus/van/car nào liên quan tới guideline không?** Cần xem confusion matrix và đối chiếu từng xe trong prediction với nhãn eval cùng schema. Nếu có nhầm MPV/car/van hoặc minibus/bus, nêu đúng ảnh, vị trí và dấu hiệu thân xe; chưa khẳng định nguyên nhân chỉ từ tên cặp lớp hoặc ma trận. Chưa có bằng chứng của phiên Colab để kết luận một ca cụ thể.
+4. **Vì sao không dùng 10 ảnh eval để train dù chúng có nhãn?** Giữ 10 ảnh này tách khỏi train để đo khả năng khái quát trên ảnh model chưa học trực tiếp. Dùng chúng để train rồi chấm trên chính chúng gây rò rỉ dữ liệu và làm chỉ số quá lạc quan. Eval ở bài này còn được dùng làm validation chọn best checkpoint nên không phải test set độc lập; giữ nguyên split 50 train/10 eval.
+
+Để hoàn tất phần Colab: nhập notebook `.ipynb` có output đã lưu và `day2_colab_outputs.zip`, đối chiếu nguồn train/schema, lấy bảng recall theo lớp, kiểm tra prediction, rồi cập nhật câu 1 và 3 cùng số liệu câu 2. Không ghi thêm chỉ số khi chưa có output thực tế.
+
 ## 7. Tiến độ và việc còn cần thực hiện
 
 - CP3: checker đạt; học viên đã xác nhận tự rà 10 preview CP3 ngày 10/11/2026.
 - CP4: bản đầu `9420f27` đã push và được giữ nguyên. Chưa có xác nhận link đã nộp trên LMS hoặc mốc khóa chung của lớp.
 - CP5: rework 50 ảnh đã đạt F1 0,9508 và mean IoU 0,8488; nhãn và CVAT khớp 607 box.
 - Huấn luyện gold_reference: đã hoàn tất local đủ 50 epoch, có metrics thật, 10 prediction và phân tích bốn câu hỏi. Nhãn gold gốc giữ local.
-- Notebook student đã chuẩn bị chạy sau CP5: kiểm tra hash nhãn train, tạo dataset runtime riêng, chuyển **bản sao** eval từ raw ID sang ID student, giữ 50 train/10 eval và nguyên tọa độ. Chạy preflight local đạt; chưa chạy huấn luyện student/Colab.
-- **Còn phiên Colab đã chạy và nộp link repo trên LMS.** Phiên điều khiển trình duyệt không kết nối được và không tìm thấy tích hợp Colab khả dụng; chưa thể chạy hoặc lưu phiên Colab bằng tài khoản học viên. [Mở notebook đã chuẩn bị trên Colab](https://colab.research.google.com/github/trxuanbac/K5-L2A-DAY02-TranXuanBac-2A202603132-ObjectDetection/blob/main/notebooks/day2_annotation_to_yolo.ipynb), chọn GPU nếu có, chạy từ đầu tới cuối, lưu bản vào Drive và lấy link quyền xem. Sau đó nhập ZIP kết quả như [SUBMISSION.md](../../SUBMISSION.md). Không upload gold train lên Colab/GitHub.
+- Notebook student đã chuẩn bị sau CP5: kiểm tra hash train, tạo runtime riêng, chuẩn hóa ID trên bản sao eval và giữ 50 train/10 eval. Preflight local đạt. Học viên đã xác nhận chạy xong Colab; cần đọc output để xác minh phiên đã dùng đúng nhãn/schema và hoàn tất mục 6a.
+- **Đã có link Colab theo xác nhận của học viên; còn nhập kết quả Colab và nộp LMS.** [Phiên đã chạy](https://colab.research.google.com/drive/1YR1tewJQCXHockB095uWxlC7hF9NdBQC#scrollTo=FX-WEVywQc3L) hiện cần quyền đăng nhập để đọc từ công cụ; chờ notebook có output và ZIP kết quả để hoàn thiện báo cáo theo [SUBMISSION.md](../../SUBMISSION.md). Không upload gold train lên Colab/GitHub.
 - Nộp link repo bằng tài khoản cá nhân trên [LMS](https://aithucchien.vinuni.edu.vn); chưa đánh dấu đã nộp khi chưa có xác nhận thực tế.
 
 ## 8. Công cụ AI và tài liệu tham khảo
